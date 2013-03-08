@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.phasebash.jsdoc</groupId>
+        <artifactId>jsdoc3</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jsdoc3-rhino</artifactId>
+
+    <name>JsDoc3 Rhino (wrapper)</name>
+    <description>A surrogate Jar prepackaging the Hegemonic branch of Mozilla's Rhino as required by jsdoc3.  Exists to
+        fulfill the (forked) rhino:js dependency through Maven.
+    </description>
+
+    <packaging>maven-plugin</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-test-data</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>download-single</goal>
+                        </goals>
+                        <configuration>
+                            <serverId>jsdoc3-github-master</serverId>
+                            <url>https://github.com</url>
+                            <fromFile>jsdoc3/jsdoc/archive/master.zip</fromFile>
+                            <toDir>${project.build.directory}/jsdoc3</toDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>doit</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <!--
+                                    Unpack the master branch
+                                -->
+                                <unzip src="${project.build.directory}/jsdoc3/master.zip"
+                                       dest="${project.build.directory}/jsdoc3/" />
+
+                                <!--
+                                    What is yours is now mine
+                                -->
+                                <unzip src="${project.build.directory}/jsdoc3/jsdoc-master/rhino/js.jar"
+                                       dest="${project.build.directory}/classes"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.phasebash.jsdoc</groupId>
+        <artifactId>jsdoc3</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jsdoc3-maven-plugin</artifactId>
+
+    <name>JsDoc3 Maven Plugin</name>
+    <description>A Maven Plugin to Generate JsDoc3 Documentation.</description>
+    <packaging>maven-plugin</packaging>
+
+    <dependencies>
+
+        <!--
+            A "faked" dependency to satiate IDEs since our real Rhino impl is generated at build-time.
+            Hacky, yes, but this way the _same_ Rhino impl is used via the Maven plugin, Ant-task, and client.
+            In the long run, the special jsdoc3-rhino impl will be removed when Rhino contains the requisite
+            features.
+        -->
+        <dependency>
+            <groupId>rhino</groupId>
+            <artifactId>js</artifactId>
+            <version>1.7R3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--
+            This is the dynamically generated impl.
+        -->
+        <dependency>
+            <groupId>com.github.phasebash.jsdoc</groupId>
+            <artifactId>jsdoc3-rhino</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <goalPrefix>jsdoc3</goalPrefix>
+                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generated-descriptor</id>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>generated-helpmojo</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-test-data</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>download-single</goal>
+                        </goals>
+                        <configuration>
+                            <serverId>jsdoc3-github-master</serverId>
+                            <url>https://github.com</url>
+                            <fromFile>jsdoc3/jsdoc/archive/master.zip</fromFile>
+                            <toDir>${project.build.directory}/jsdoc3</toDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>inn</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <echo message="unpacking jsdoc3 zip and removing binaries" />
+                                <unzip src="${project.build.directory}/jsdoc3/master.zip"
+                                       dest="${project.build.directory}/jsdoc3/" />
+
+                                <delete>
+                                    <fileset dir="${project.build.directory}/jsdoc3/jsdoc-master"
+                                             includes="**/*.jar"/>
+                                </delete>
+
+                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/master.zip"
+                                     basedir="${project.build.directory}/jsdoc3/jsdoc-master"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.1</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>
