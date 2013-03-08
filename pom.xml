@@ -27,6 +27,17 @@
         <maven>${mavenVersion}</maven>
     </prerequisites>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>${snapshotsRepoUrl}</url>
+        </snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <url>${releasesRepoUrl}</url>
+        </repository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
 
