@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.github.phasebash.jsdoc</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>jsdoc3-maven-plugin</artifactId>
@@ -44,12 +44,6 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
             <scope>compile</scope>
         </dependency>
 
@@ -130,10 +124,10 @@
                                 <unzip src="${project.build.directory}/jsdoc3/master.zip"
                                        dest="${project.build.directory}/jsdoc3/" />
 
-                                <delete>
-                                    <fileset dir="${project.build.directory}/jsdoc3/jsdoc-master"
-                                             includes="**/*.jar"/>
-                                </delete>
+                                <!--<delete>-->
+                                    <!--<fileset dir="${project.build.directory}/jsdoc3/jsdoc-master"-->
+                                             <!--includes="**/*.jar"/>-->
+                                <!--</delete>-->
 
                                 <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/master.zip"
                                      basedir="${project.build.directory}/jsdoc3/jsdoc-master"/>

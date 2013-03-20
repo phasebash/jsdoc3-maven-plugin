@@ -1,8 +1,7 @@
 package com.github.phasebash.jsdoc3.maven.tasks;
 
-import org.mozilla.javascript.tools.shell.NonExitingMain;
-
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,10 +28,15 @@ final class JsDocTask implements Task {
     public void execute(TaskContext context) throws TaskException {
         final List<String> arguments = new LinkedList<String>();
 
-        arguments.add("-opt");
-        arguments.add("-1");
-
         final String basePath = context.getJsDocDir().getAbsolutePath();
+        final String javaHome = System.getProperty("java.home");
+        final File java = new File(javaHome, "bin" + File.separator + "java");
+
+        arguments.add(java.getAbsolutePath());
+        arguments.add("-classpath");
+        arguments.add(new File(basePath, "rhino/js.jar").getAbsolutePath());
+        arguments.add("org.mozilla.javascript.tools.shell.Main");
+
         for (final String module : MODULES) {
             arguments.add("-modules");
 
@@ -44,6 +48,10 @@ final class JsDocTask implements Task {
         arguments.add(basePath + "/jsdoc.js");
         arguments.add("--dirname=" + basePath + "/");
 
+        if (context.isRecursive()) {
+            arguments.add("-r");
+        }
+
         arguments.add("-d");
         arguments.add(context.getOutputDir().getAbsolutePath());
 
@@ -51,14 +59,29 @@ final class JsDocTask implements Task {
             arguments.add(sourceFile.getAbsolutePath());
         }
 
-        if (context.isDebug()) {
-            arguments.add(0, "-debug");
+        Process process;
 
-            final String[] arrayArguments = arguments.toArray(new String[arguments.size()]);
-            org.mozilla.javascript.tools.debugger.Main.main(arrayArguments);
+        System.err.println(arguments);
+
+        if (context.isDebug()) {
+            throw new UnsupportedOperationException("Debug mode not currently supported.");
         } else {
-            final String[] arrayArguments = arguments.toArray(new String[arguments.size()]);
-            NonExitingMain.main(arrayArguments);
+            final ProcessBuilder processBuilder = new ProcessBuilder(arguments);
+
+            try {
+                process = processBuilder.start();
+            } catch (IOException e) {
+                throw new TaskException("Unable to execute jsdoc tasks in new JVM.", e);
+            }
+        }
+
+        try {
+            final int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                throw new TaskException("Process died with exit code " + exitCode);
+            }
+        } catch (InterruptedException e) {
+            throw new TaskException("Interrupt while waiting for jsdoc task to complete.", e);
         }
     }
 }

@@ -26,6 +26,9 @@ public final class TaskContext {
     /** if jsdoc should run in debug mode */
     private final boolean debug;
 
+    /** if we shall pass the -r flag to jsdoc. */
+    private final boolean recursive;
+
     /**
      * Private constructor.
      *
@@ -34,13 +37,16 @@ public final class TaskContext {
      * @param jsDocDir  the jsdoc dir.
      * @param tempDir   the temp dir.
      * @param debug     if debug mode should be used.
+     * @param recursive if the jsdoc task should recursively look for jsfiles.
      */
-    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tempDir, boolean debug) {
+    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir,
+                File tempDir, boolean debug, boolean recursive) {
         this.sourceDir = sourceDir;
         this.jsDocDir  = jsDocDir;
         this.outputDir = outputDir;
         this.tempDir   = tempDir;
         this.debug     = debug;
+        this.recursive = recursive;
     }
 
     /**
@@ -89,11 +95,22 @@ public final class TaskContext {
     }
 
     /**
+     * Recursive mode?
+     *
+     * @return true for yes, false for no.
+     */
+    public boolean isRecursive() {
+        return recursive;
+    }
+
+    /**
      * The way in which a TaskContext should be built.
      */
     public static class Builder {
 
         private Set<File> sourceFiles = new LinkedHashSet<File>();
+
+        private Set<File> directoryRoots = new LinkedHashSet<File>();
 
         private File outputDirectory;
 
@@ -103,14 +120,11 @@ public final class TaskContext {
 
         private boolean debug = false;
 
-        public Builder withSourceFiles(final Collection<File> sourceFiles) {
-            this.sourceFiles.addAll(sourceFiles);
-            return this;
-        }
+        private boolean recursive = false;
 
-        public Builder withSourceFiles(final File... sourceFiles) {
+        public Builder withSourceFiles(final Collection<File> sourceFiles) {
             if (sourceFiles != null) {
-                Collections.addAll(this.sourceFiles, sourceFiles);
+                this.sourceFiles.addAll(sourceFiles);
             }
             return this;
         }
@@ -125,9 +139,13 @@ public final class TaskContext {
             return this;
         }
 
-
         public Builder withTempDirectory(final File tempDirectory) {
             this.tempDirectory = tempDirectory;
+            return this;
+        }
+
+        public Builder withRecursive(final boolean recursive) {
+            this.recursive = recursive;
             return this;
         }
 
@@ -142,10 +160,20 @@ public final class TaskContext {
             return this;
         }
 
-        public TaskContext build() {
-            if (sourceFiles.size() == 0) {
-                throw new IllegalArgumentException("sourceFiles or sourceDirectories are required.");
+        public void withDirectoryRoots(final Set<File> directoryRoots) {
+            if (directoryRoots != null) {
+                this.directoryRoots.addAll(directoryRoots);
             }
+        }
+
+        public TaskContext build() {
+            if (sourceFiles.size() == 0 && directoryRoots.size() == 0) {
+                throw new IllegalArgumentException("sourceFiles and/or directoryRoots are required.");
+            }
+
+            final Collection<File> sourceRoots = new LinkedHashSet<File>();
+            sourceRoots.addAll(sourceFiles);
+            sourceRoots.addAll(directoryRoots);
 
             if (!outputDirectory.exists()) {
                 throw new IllegalStateException("Output directory must exist.");
@@ -159,7 +187,7 @@ public final class TaskContext {
                 throw new IllegalStateException("Temp directory must not be null.");
             }
 
-            return new TaskContext(sourceFiles, outputDirectory, jsDocDirectory, tempDirectory, debug);
+            return new TaskContext(sourceRoots, outputDirectory, jsDocDirectory, tempDirectory, debug, recursive);
         }
     }
 }
