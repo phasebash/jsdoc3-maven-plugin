@@ -43,6 +43,7 @@ final class JsDocTask implements Task {
             arguments.add(file.getAbsolutePath());
         }
 
+        arguments.add("-modules");
         arguments.add(basePath.getAbsolutePath());
 
         arguments.add(basePath + File.separator + "jsdoc.js");
