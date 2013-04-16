@@ -4,7 +4,7 @@ The jsdoc3-maven-plugin is free software, licensed under the Apache License, Ver
 "License"). Commercial and non-commercial use are permitted in compliance with
 the License.
 
-Copyright (c) 2011-2012 Brandon Zeeb <phasebash@gmail.com>
+Copyright (c) 2013 Brandon Zeeb <phasebash@gmail.com>
 All rights reserved.
 
 You may obtain a copy of the License at:
@@ -52,15 +52,14 @@ The project page for org.apache.maven:maven-plugin-annotations is available at:
 http://maven.apache.org/ref/3-LATEST/maven-plugin-api/index.html
 
 
-## org.codehaus.plexus:plexus-utils ##
+## commons-io:commons-io ##
 
-org.codehaus.plexus:plexus-utils is distributed under the Apache 2.0 license.
+commons-io:commons-io is distributed under the Apache 2.0 license.
 
-Copyright (c) 2013 Codehaus.
+Copyright (c) 2013 The Apache Software Foundation.
 
 The project page for org.apache.maven:maven-plugin-annotations is available at:
-http://plexus.codehaus.org/plexus-utils/
-
+http://commons.apache.org/proper/commons-io/
 
 ## Rhino ##
 
@@ -104,5 +103,4 @@ Additionally, some files are available under the BSD 3-clause license:
 
 ### Source Code ###
 The source code for Rhino is available at:
-https://github.com/mozilla/rhino
-https://github.com/hegemonic/rhino
+https://github.com/mozilla/rhino and https://github.com/hegemonic/rhino respectively.

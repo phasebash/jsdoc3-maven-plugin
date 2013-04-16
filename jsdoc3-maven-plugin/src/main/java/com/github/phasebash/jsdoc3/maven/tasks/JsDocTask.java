@@ -15,7 +15,7 @@ final class JsDocTask implements Task {
 
     /** the commonjs module directories to include */
     private static final List<String> MODULES = Collections.unmodifiableList(Arrays.asList(
-            "node_modules", "rhino", "lib", null
+        "node_modules", "rhino", "lib"
     ));
 
     /**
@@ -28,25 +28,25 @@ final class JsDocTask implements Task {
     public void execute(TaskContext context) throws TaskException {
         final List<String> arguments = new LinkedList<String>();
 
-        final String basePath = context.getJsDocDir().getAbsolutePath();
+        final File basePath = context.getJsDocDir();
         final String javaHome = System.getProperty("java.home");
         final File java = new File(javaHome, "bin" + File.separator + "java");
 
         arguments.add(java.getAbsolutePath());
         arguments.add("-classpath");
-        arguments.add(new File(basePath, "rhino/js.jar").getAbsolutePath());
+        arguments.add(new File(basePath, "rhino" + File.separator + "js.jar").getAbsolutePath());
         arguments.add("org.mozilla.javascript.tools.shell.Main");
 
         for (final String module : MODULES) {
             arguments.add("-modules");
-
-            final URI uri = URI.create(basePath + (module != null ? "/" + module : "")).normalize();
-
-            arguments.add(uri.toASCIIString());
+            final File file = new File(basePath, module);
+            arguments.add(file.getAbsolutePath());
         }
 
-        arguments.add(basePath + "/jsdoc.js");
-        arguments.add("--dirname=" + basePath + "/");
+        arguments.add(basePath.getAbsolutePath());
+
+        arguments.add(basePath + File.separator + "jsdoc.js");
+        arguments.add("--dirname=" + basePath + File.separator);
 
         if (context.isRecursive()) {
             arguments.add("-r");

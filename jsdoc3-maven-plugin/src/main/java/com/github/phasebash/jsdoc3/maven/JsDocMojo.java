@@ -25,7 +25,7 @@ public class JsDocMojo extends AbstractMojo {
     private File workingDirectory;
 
     /** the directory where source files sit */
-    @Parameter(required = true)
+    @Parameter(required = false)
     private Set<File> directoryRoots;
 
     /** the directory where source files sit */
