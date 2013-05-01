@@ -53,9 +53,9 @@ final class JsDocTask implements Task {
             arguments.add("-r");
         }
 		
-		if (context.isIncludePrivate()) {
-			arguments.add("-p");
-		}
+        if (context.isIncludePrivate()) {
+            arguments.add("-p");
+        }
 
         arguments.add("-d");
         arguments.add(context.getOutputDir().getAbsolutePath());

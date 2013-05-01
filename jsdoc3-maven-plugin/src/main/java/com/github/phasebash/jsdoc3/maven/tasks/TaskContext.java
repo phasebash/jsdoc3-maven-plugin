@@ -52,7 +52,7 @@ public final class TaskContext {
         this.tempDir   = tempDir;
         this.debug     = debug;
         this.recursive = recursive;
-		this.includePrivate = includePrivate;
+        this.includePrivate = includePrivate;
     }
 
     /**
@@ -109,14 +109,14 @@ public final class TaskContext {
         return recursive;
     }
 	
-	/**
-	 * Should private symbols be included.
-	 * 
-	 * @return true for yes, false for no.
-	 */
-	public boolean isIncludePrivate() {
-		return includePrivate;
-	}
+    /**
+     * Should private symbols be included.
+     * 
+     * @return true for yes, false for no.
+     */
+    public boolean isIncludePrivate() {
+        return includePrivate;
+    }
 
     /**
      * The way in which a TaskContext should be built.
@@ -137,7 +137,7 @@ public final class TaskContext {
 
         private boolean recursive = false;
 		
-		private boolean includePrivate = false;
+        private boolean includePrivate = false;
 
         public Builder withSourceFiles(final Collection<File> sourceFiles) {
             if (sourceFiles != null) {
@@ -177,10 +177,10 @@ public final class TaskContext {
             return this;
         }
 		
-		public Builder withIncludePrivate(final boolean includePrivate) {
-			this.includePrivate = includePrivate;
-			return this;
-		}
+        public Builder withIncludePrivate(final boolean includePrivate) {
+            this.includePrivate = includePrivate;
+            return this;
+        }
 
         public void withDirectoryRoots(final Set<File> directoryRoots) {
             if (directoryRoots != null) {

@@ -63,7 +63,7 @@ public class JsDocMojo extends AbstractMojo {
         final TaskContext.Builder builder = new TaskContext.Builder();
         builder.withDebug(debug);
         builder.withRecursive(recursive);
-		builder.withIncludePrivate(includePrivate);
+        builder.withIncludePrivate(includePrivate);
         builder.withSourceFiles(sourceFiles);
         builder.withDirectoryRoots(directoryRoots);
         builder.withOutputDirectory(outputDirectory);
