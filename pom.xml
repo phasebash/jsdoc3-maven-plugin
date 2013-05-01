@@ -18,7 +18,7 @@
 
     <groupId>com.github.phasebash</groupId>
     <artifactId>jsdoc3</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
 
     <name>JsDoc3 Maven Plugin</name>
     <description>A Maven Plugin to Generate JsDoc3 Documentation.</description>
