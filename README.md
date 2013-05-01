@@ -14,7 +14,7 @@ will soon be available in Sonatype.
 
 ### Example POM: Recurse subdirectories only ##
     <plugin>
-        <groupId>com.github.phasebash.jsdoc</groupId>
+        <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
         <version>${jsdoc3-maven-plugin.version}</version>
         <configuration>
@@ -35,7 +35,7 @@ will soon be available in Sonatype.
 
 ### Example POM: Recurse subdirectories + errant files ##
     <plugin>
-        <groupId>com.github.phasebash.jsdoc</groupId>
+        <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
         <version>${jsdoc3-maven-plugin.version}</version>
         <configuration>
@@ -59,7 +59,7 @@ will soon be available in Sonatype.
 
 ### Example POM: Cherry pick ##
     <plugin>
-        <groupId>com.github.phasebash.jsdoc</groupId>
+        <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
         <version>${jsdoc3-maven-plugin.version}</version>
         <configuration>

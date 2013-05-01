@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.phasebash.jsdoc</groupId>
+        <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>jsdoc3-maven-plugin</artifactId>
@@ -35,7 +35,7 @@
             This is the dynamically generated impl.
         -->
         <dependency>
-            <groupId>com.github.phasebash.jsdoc</groupId>
+            <groupId>com.github.phasebash</groupId>
             <artifactId>jsdoc3-rhino</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
