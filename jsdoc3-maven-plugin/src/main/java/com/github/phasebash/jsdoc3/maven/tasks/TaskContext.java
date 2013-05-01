@@ -29,6 +29,10 @@ public final class TaskContext {
     /** if we shall pass the -r flag to jsdoc. */
     private final boolean recursive;
 
+    /** if we shall pass the -p flag to jsdoc. */
+    private final boolean includePrivate;
+
+    /**
     /**
      * Private constructor.
      *
@@ -38,15 +42,17 @@ public final class TaskContext {
      * @param tempDir   the temp dir.
      * @param debug     if debug mode should be used.
      * @param recursive if the jsdoc task should recursively look for jsfiles.
+     * @param includePrivate if private symbols should be included.
      */
     TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir,
-                File tempDir, boolean debug, boolean recursive) {
+                File tempDir, boolean debug, boolean recursive, boolean includePrivate) {
         this.sourceDir = sourceDir;
         this.jsDocDir  = jsDocDir;
         this.outputDir = outputDir;
         this.tempDir   = tempDir;
         this.debug     = debug;
         this.recursive = recursive;
+        this.includePrivate = includePrivate;
     }
 
     /**
@@ -102,6 +108,15 @@ public final class TaskContext {
     public boolean isRecursive() {
         return recursive;
     }
+	
+    /**
+     * Should private symbols be included.
+     * 
+     * @return true for yes, false for no.
+     */
+    public boolean isIncludePrivate() {
+        return includePrivate;
+    }
 
     /**
      * The way in which a TaskContext should be built.
@@ -121,6 +136,8 @@ public final class TaskContext {
         private boolean debug = false;
 
         private boolean recursive = false;
+		
+        private boolean includePrivate = false;
 
         public Builder withSourceFiles(final Collection<File> sourceFiles) {
             if (sourceFiles != null) {
@@ -159,6 +176,11 @@ public final class TaskContext {
             this.debug = debug;
             return this;
         }
+		
+        public Builder withIncludePrivate(final boolean includePrivate) {
+            this.includePrivate = includePrivate;
+            return this;
+        }
 
         public void withDirectoryRoots(final Set<File> directoryRoots) {
             if (directoryRoots != null) {
@@ -187,7 +209,7 @@ public final class TaskContext {
                 throw new IllegalStateException("Temp directory must not be null.");
             }
 
-            return new TaskContext(sourceRoots, outputDirectory, jsDocDirectory, tempDirectory, debug, recursive);
+            return new TaskContext(sourceRoots, outputDirectory, jsDocDirectory, tempDirectory, debug, recursive, includePrivate);
         }
     }
 }
