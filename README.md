@@ -84,6 +84,7 @@ will soon be available in Sonatype.
 * recursive (Optional) - Boolean: A flag to indicate whether or not all directory roots should be searched and all files included recursively.
 * sourceFiles (Optional) - File[]: An Array of Files which will be included into the final jsdoc argument list.
 * outputDirectory (Optional) - File: The place where jsdoc should be written.  default: "${project.build.directory}/site/jsdoc"
+* includePrivate (Optional) - Boolean: A flag to indicate whether @private symbols are included in the generated documentation.
 
 ## Questions, Feedback? ##
 Feel free to submit an issue ticket through github or contact me directly.  I will help you.

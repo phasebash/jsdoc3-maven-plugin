@@ -43,6 +43,10 @@ public class JsDocMojo extends AbstractMojo {
     @Parameter(required = true, defaultValue = "false")
     private boolean debug;
 
+    /** if private symbols should in included in documentation. */
+    @Parameter(required = true, defaultValue = "false")
+    private boolean includePrivate;
+
     /**
      * Execute the jsdoc3 Main.
      *
@@ -59,6 +63,7 @@ public class JsDocMojo extends AbstractMojo {
         final TaskContext.Builder builder = new TaskContext.Builder();
         builder.withDebug(debug);
         builder.withRecursive(recursive);
+		builder.withIncludePrivate(includePrivate);
         builder.withSourceFiles(sourceFiles);
         builder.withDirectoryRoots(directoryRoots);
         builder.withOutputDirectory(outputDirectory);

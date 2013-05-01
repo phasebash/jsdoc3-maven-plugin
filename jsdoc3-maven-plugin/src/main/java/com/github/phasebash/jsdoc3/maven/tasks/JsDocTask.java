@@ -52,6 +52,10 @@ final class JsDocTask implements Task {
         if (context.isRecursive()) {
             arguments.add("-r");
         }
+		
+		if (context.isIncludePrivate()) {
+			arguments.add("-p");
+		}
 
         arguments.add("-d");
         arguments.add(context.getOutputDir().getAbsolutePath());
