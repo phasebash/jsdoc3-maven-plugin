@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>jsdoc3-rhino</artifactId>
@@ -53,14 +51,12 @@
                                 <!--
                                     Unpack the master branch
                                 -->
-                                <unzip src="${project.build.directory}/jsdoc3/master.zip"
-                                       dest="${project.build.directory}/jsdoc3/" />
+                                <unzip src="${project.build.directory}/jsdoc3/master.zip" dest="${project.build.directory}/jsdoc3/" />
 
                                 <!--
                                     What is yours is now mine
                                 -->
-                                <unzip src="${project.build.directory}/jsdoc3/jsdoc-master/rhino/js.jar"
-                                       dest="${project.build.directory}/classes"/>
+                                <unzip src="${project.build.directory}/jsdoc3/jsdoc-master/rhino/js.jar" dest="${project.build.directory}/classes" />
                             </target>
                         </configuration>
                         <goals>

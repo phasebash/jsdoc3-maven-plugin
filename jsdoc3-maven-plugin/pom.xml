@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>jsdoc3-maven-plugin</artifactId>
@@ -121,16 +119,14 @@
                         <configuration>
                             <target>
                                 <echo message="unpacking jsdoc3 zip and removing binaries" />
-                                <unzip src="${project.build.directory}/jsdoc3/master.zip"
-                                       dest="${project.build.directory}/jsdoc3/" />
+                                <unzip src="${project.build.directory}/jsdoc3/master.zip" dest="${project.build.directory}/jsdoc3/" />
 
                                 <!--<delete>-->
                                     <!--<fileset dir="${project.build.directory}/jsdoc3/jsdoc-master"-->
-                                             <!--includes="**/*.jar"/>-->
+                                             <!--includes="**/*.jar" />-->
                                 <!--</delete>-->
 
-                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/master.zip"
-                                     basedir="${project.build.directory}/jsdoc3/jsdoc-master"/>
+                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/master.zip" basedir="${project.build.directory}/jsdoc3/jsdoc-master" />
                             </target>
                         </configuration>
                         <goals>
