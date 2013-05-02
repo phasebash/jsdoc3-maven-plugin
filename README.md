@@ -9,14 +9,14 @@ built for the purposes of generating [jsdoc](http://usejsdoc.org/) along with th
 plugin will bind to the _site_ phase, though this is configurable as with any other Maven plugin with goals.
 
 ## Getting Started ##
-The following examples enumerate the most common POM configurations for the jsdoc3-maven-plugin.  Please note, this plugin
-will soon be available in Sonatype.
+The following examples enumerate the most common POM configurations for the jsdoc3-maven-plugin.  This plugin is made
+available through [Sonatype](http://www.sonatype.org/) and is synchronized with the central Maven repository.
 
 ### Example POM: Recurse subdirectories only ##
     <plugin>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>${jsdoc3-maven-plugin.version}</version>
+        <version>1.0.2</version>
         <configuration>
             <recursive>true</recursive>
             <directoryRoots>
@@ -37,7 +37,7 @@ will soon be available in Sonatype.
     <plugin>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>${jsdoc3-maven-plugin.version}</version>
+        <version>1.0.2</version>
         <configuration>
             <recursive>true</recursive>
             <directoryRoots>
@@ -61,7 +61,7 @@ will soon be available in Sonatype.
     <plugin>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>${jsdoc3-maven-plugin.version}</version>
+        <version>1.0.2</version>
         <configuration>
             <sourceFiles>
                 <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
