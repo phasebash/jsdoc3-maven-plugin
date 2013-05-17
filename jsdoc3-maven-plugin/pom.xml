@@ -52,6 +52,12 @@
         </dependency>
 
         <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
             <scope>compile</scope>
@@ -102,7 +108,7 @@
                         <configuration>
                             <serverId>jsdoc3-github-master</serverId>
                             <url>https://github.com</url>
-                            <fromFile>jsdoc3/jsdoc/archive/master.zip</fromFile>
+                            <fromFile>jsdoc3/jsdoc/archive/releases/${jsdoc.release.version}.zip</fromFile>
                             <toDir>${project.build.directory}/jsdoc3</toDir>
                         </configuration>
                     </execution>
@@ -119,14 +125,17 @@
                         <configuration>
                             <target>
                                 <echo message="unpacking jsdoc3 zip and removing binaries" />
-                                <unzip src="${project.build.directory}/jsdoc3/master.zip" dest="${project.build.directory}/jsdoc3/" />
+                                <unzip src="${project.build.directory}/jsdoc3/${jsdoc.release.version}.zip" dest="${project.build.directory}/jsdoc3/" />
 
+                                <!--
+                                    As long as we are invoking the provided executable, we need to retain this jar.
+                                -->
                                 <!--<delete>-->
-                                    <!--<fileset dir="${project.build.directory}/jsdoc3/jsdoc-master"-->
+                                    <!--<fileset dir="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc.release.version}"-->
                                              <!--includes="**/*.jar" />-->
                                 <!--</delete>-->
 
-                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/master.zip" basedir="${project.build.directory}/jsdoc3/jsdoc-master" />
+                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/jsdoc.zip" basedir="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc.release.version}" />
                             </target>
                         </configuration>
                         <goals>

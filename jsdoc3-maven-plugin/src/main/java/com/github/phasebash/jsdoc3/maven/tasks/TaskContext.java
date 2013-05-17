@@ -1,8 +1,9 @@
 package com.github.phasebash.jsdoc3.maven.tasks;
 
+import org.apache.maven.plugin.logging.Log;
+
 import java.io.File;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -20,6 +21,9 @@ public final class TaskContext {
     /** the directory where jsdoc source files can be found */
     private final File jsDocDir;
 
+    /** the (possibly null) tutorials directory to include. */
+    private final File tutorialsDirectory;
+
     /** a temp dir for scratch files */
     private final File tempDir;
 
@@ -32,6 +36,9 @@ public final class TaskContext {
     /** if we shall pass the -p flag to jsdoc. */
     private final boolean includePrivate;
 
+    /** the logger. */
+    private final Log log;
+
     /**
     /**
      * Private constructor.
@@ -43,16 +50,19 @@ public final class TaskContext {
      * @param debug     if debug mode should be used.
      * @param recursive if the jsdoc task should recursively look for jsfiles.
      * @param includePrivate if private symbols should be included.
+     * @param log The logger.
      */
-    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir,
-                File tempDir, boolean debug, boolean recursive, boolean includePrivate) {
+    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory,
+                File tempDir, boolean debug, boolean recursive, boolean includePrivate, Log log) {
         this.sourceDir = sourceDir;
         this.jsDocDir  = jsDocDir;
         this.outputDir = outputDir;
+        this.tutorialsDirectory = tutorialsDirectory;
         this.tempDir   = tempDir;
         this.debug     = debug;
         this.recursive = recursive;
         this.includePrivate = includePrivate;
+        this.log = log;
     }
 
     /**
@@ -80,6 +90,15 @@ public final class TaskContext {
      */
     public File getTempDir() {
         return tempDir;
+    }
+
+    /**
+     * Get the tutorials directory.
+     *
+     * @return The tutorials directory.
+     */
+    public File getTutorialsDirectory() {
+        return tutorialsDirectory;
     }
 
     /**
@@ -119,6 +138,15 @@ public final class TaskContext {
     }
 
     /**
+     * The logger.
+     *
+     * @return The logger.
+     */
+    public Log getLog() {
+        return log;
+    }
+
+    /**
      * The way in which a TaskContext should be built.
      */
     public static class Builder {
@@ -138,6 +166,10 @@ public final class TaskContext {
         private boolean recursive = false;
 		
         private boolean includePrivate = false;
+
+        private File tutorialsDirectory;
+
+        private Log log;
 
         public Builder withSourceFiles(final Collection<File> sourceFiles) {
             if (sourceFiles != null) {
@@ -188,6 +220,16 @@ public final class TaskContext {
             }
         }
 
+        public void withTutorialsDirectory(File tutorialsDirectory) {
+            if (tutorialsDirectory != null && tutorialsDirectory.exists() && tutorialsDirectory.isDirectory()) {
+                this.tutorialsDirectory = tutorialsDirectory;
+            }
+        }
+
+        public void withLog(Log log) {
+            this.log = log;
+        }
+
         public TaskContext build() {
             if (sourceFiles.size() == 0 && directoryRoots.size() == 0) {
                 throw new IllegalArgumentException("sourceFiles and/or directoryRoots are required.");
@@ -209,7 +251,10 @@ public final class TaskContext {
                 throw new IllegalStateException("Temp directory must not be null.");
             }
 
-            return new TaskContext(sourceRoots, outputDirectory, jsDocDirectory, tempDirectory, debug, recursive, includePrivate);
+            // this is getting a little out of hand...
+            return new TaskContext(sourceRoots,
+                    outputDirectory, jsDocDirectory, tutorialsDirectory,
+                    tempDirectory, debug, recursive, includePrivate, log);
         }
     }
 }

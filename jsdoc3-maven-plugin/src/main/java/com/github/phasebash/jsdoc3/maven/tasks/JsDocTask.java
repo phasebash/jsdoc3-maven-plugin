@@ -1,8 +1,10 @@
 package com.github.phasebash.jsdoc3.maven.tasks;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.maven.plugin.logging.SystemStreamLog;
+
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -15,7 +17,7 @@ final class JsDocTask implements Task {
 
     /** the commonjs module directories to include */
     private static final List<String> MODULES = Collections.unmodifiableList(Arrays.asList(
-        "node_modules", "rhino", "lib"
+        "node_modules", "rhino", "lib", ""
     ));
 
     /**
@@ -29,25 +31,20 @@ final class JsDocTask implements Task {
         final List<String> arguments = new LinkedList<String>();
 
         final File basePath = context.getJsDocDir();
-        final String javaHome = System.getProperty("java.home");
-        final File java = new File(javaHome, "bin" + File.separator + "java");
 
-        arguments.add(java.getAbsolutePath());
+        arguments.add("java");
         arguments.add("-classpath");
-        arguments.add(new File(basePath, "rhino" + File.separator + "js.jar").getAbsolutePath());
+        arguments.add(replace(new File(basePath, "rhino" + File.separator + "js.jar").toString()));
         arguments.add("org.mozilla.javascript.tools.shell.Main");
 
         for (final String module : MODULES) {
             arguments.add("-modules");
-            final File file = new File(basePath, module);
-            arguments.add(file.getAbsolutePath());
+            arguments.add(asUriString(new File(basePath, module)));
         }
 
-        arguments.add("-modules");
-        arguments.add(basePath.getAbsolutePath());
+        arguments.add(replace(new File(basePath, "jsdoc.js").toString()));
 
-        arguments.add(basePath + File.separator + "jsdoc.js");
-        arguments.add("--dirname=" + basePath + File.separator);
+        arguments.add("--dirname=" + replace(basePath.toString()));
 
         if (context.isRecursive()) {
             arguments.add("-r");
@@ -57,16 +54,19 @@ final class JsDocTask implements Task {
             arguments.add("-p");
         }
 
+        if (context.getTutorialsDirectory() != null) {
+            arguments.add("-u");
+            arguments.add(context.getTutorialsDirectory().toString());
+        }
+
         arguments.add("-d");
-        arguments.add(context.getOutputDir().getAbsolutePath());
+        arguments.add(context.getOutputDir().toString());
 
         for (final File sourceFile : context.getSourceDir()) {
-            arguments.add(sourceFile.getAbsolutePath());
+            arguments.add(sourceFile.toString());
         }
 
         Process process;
-
-        System.err.println(arguments);
 
         if (context.isDebug()) {
             throw new UnsupportedOperationException("Debug mode not currently supported.");
@@ -75,6 +75,8 @@ final class JsDocTask implements Task {
 
             try {
                 process = processBuilder.start();
+                new StreamLogger(process.getErrorStream(), context.getLog()).run();
+                new StreamLogger(process.getInputStream(), context.getLog()).run();
             } catch (IOException e) {
                 throw new TaskException("Unable to execute jsdoc tasks in new JVM.", e);
             }
@@ -88,5 +90,17 @@ final class JsDocTask implements Task {
         } catch (InterruptedException e) {
             throw new TaskException("Interrupt while waiting for jsdoc task to complete.", e);
         }
+    }
+
+    private String asNormalizedFileString(final File file) {
+        return file.getAbsolutePath().replace("\\", "/");
+    }
+
+    private String asUriString(final File file) {
+        return (File.separator.equals("/") ? "file://" : "file:/") + asNormalizedFileString(file);
+    }
+
+    private String replace(String string) {
+        return string.replace("\\", "/");
     }
 }

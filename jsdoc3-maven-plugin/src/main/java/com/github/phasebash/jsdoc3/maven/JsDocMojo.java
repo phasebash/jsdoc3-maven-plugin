@@ -48,6 +48,13 @@ public class JsDocMojo extends AbstractMojo {
     private boolean includePrivate;
 
     /**
+     * if a tutuorials directory will be provided to jsdoc to resolve tutorial links.
+     * see: http://usejsdoc.org/about-tutorials.html
+     */
+    @Parameter(required = false)
+    private File tutorialsDirectory;
+
+    /**
      * Execute the jsdoc3 Main.
      *
      * @throws MojoExecutionException If parameters aren't correct or if an error is occurred while running jsdoc.
@@ -69,6 +76,7 @@ public class JsDocMojo extends AbstractMojo {
         builder.withOutputDirectory(outputDirectory);
         builder.withTempDirectory(workingDirectory);
         builder.withJsDocDirectory(jsDoc3Dir);
+        builder.withTutorialsDirectory(tutorialsDirectory);
 
         try {
             final TaskContext taskContext = builder.build();

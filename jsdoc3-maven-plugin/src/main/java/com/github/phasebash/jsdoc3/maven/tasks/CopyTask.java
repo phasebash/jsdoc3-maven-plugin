@@ -13,7 +13,7 @@ import java.net.URL;
 final class CopyTask implements Task {
 
     /** the jsdoc3 zip classpath reference */
-    private static final String JSDOC_ARCHIVE_PATH = "com/github/jsdoc3/master.zip";
+    private static final String JSDOC_ARCHIVE_PATH = "com/github/jsdoc3/jsdoc.zip";
 
     /**
      * Copy the zip.
