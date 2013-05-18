@@ -55,6 +55,13 @@ public class JsDocMojo extends AbstractMojo {
     private File tutorialsDirectory;
 
     /**
+     * if a configuration file will be provided to jsdoc.
+     * see: http://usejsdoc.org/about-configuring-jsdoc.html#configuration-file
+     */
+    @Parameter(required = false)
+    private File configFile;
+
+    /**
      * Execute the jsdoc3 Main.
      *
      * @throws MojoExecutionException If parameters aren't correct or if an error is occurred while running jsdoc.
@@ -78,6 +85,7 @@ public class JsDocMojo extends AbstractMojo {
         builder.withTempDirectory(workingDirectory);
         builder.withJsDocDirectory(jsDoc3Dir);
         builder.withTutorialsDirectory(tutorialsDirectory);
+        builder.withConfigFile(configFile);
 
         try {
             final TaskContext taskContext = builder.build();

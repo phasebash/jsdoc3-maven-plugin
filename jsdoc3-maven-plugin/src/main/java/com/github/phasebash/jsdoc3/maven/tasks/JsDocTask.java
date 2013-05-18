@@ -51,6 +51,11 @@ final class JsDocTask implements Task {
             arguments.add("-r");
         }
 		
+        if (context.getConfigFile() != null) {
+            arguments.add("-c");
+            arguments.add(context.getConfigFile().toString());
+        }
+
         if (context.isIncludePrivate()) {
             arguments.add("-p");
         }

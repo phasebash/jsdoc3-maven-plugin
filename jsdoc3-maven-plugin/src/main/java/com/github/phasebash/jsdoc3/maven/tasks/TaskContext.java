@@ -27,6 +27,9 @@ public final class TaskContext {
     /** a temp dir for scratch files */
     private final File tempDir;
 
+    /** The path to the configuration file. Default: jsdoc __dirname + /conf.json */
+    private final File configFile;
+
     /** if jsdoc should run in debug mode */
     private final boolean debug;
 
@@ -43,24 +46,27 @@ public final class TaskContext {
     /**
      * Private constructor.
      *
-     * @param sourceDir the source dir.
-     * @param outputDir the output dir.
-     * @param jsDocDir  the jsdoc dir.
-     * @param tempDir   the temp dir.
-     * @param debug     if debug mode should be used.
-     * @param recursive if the jsdoc task should recursively look for jsfiles.
+     * @param sourceDir      the source dir.
+     * @param outputDir      the output dir.
+     * @param jsDocDir       the jsdoc dir.
+     * @param jsDocDir       the tutorials dir.
+     * @param configFile     the configuration file (i.e. conf.json).
+     * @param tempDir        the temp dir.
+     * @param debug          if debug mode should be used.
+     * @param recursive      if the jsdoc task should recursively look for jsfiles.
      * @param includePrivate if private symbols should be included.
-     * @param log The logger.
+     * @param log            The logger.
      */
-    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory,
+    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory, File configFile,
                 File tempDir, boolean debug, boolean recursive, boolean includePrivate, Log log) {
-        this.sourceDir = sourceDir;
-        this.jsDocDir  = jsDocDir;
-        this.outputDir = outputDir;
+        this.sourceDir  = sourceDir;
+        this.jsDocDir   = jsDocDir;
+        this.outputDir  = outputDir;
         this.tutorialsDirectory = tutorialsDirectory;
-        this.tempDir   = tempDir;
-        this.debug     = debug;
-        this.recursive = recursive;
+        this.configFile = configFile;
+        this.tempDir    = tempDir;
+        this.debug      = debug;
+        this.recursive  = recursive;
         this.includePrivate = includePrivate;
         this.log = log;
     }
@@ -99,6 +105,15 @@ public final class TaskContext {
      */
     public File getTutorialsDirectory() {
         return tutorialsDirectory;
+    }
+
+    /**
+     * Get the configuration file (i.e. conf.json).
+     *
+     * @return The configuration file.
+     */
+    public File getConfigFile() {
+        return configFile;
     }
 
     /**
@@ -159,6 +174,8 @@ public final class TaskContext {
 
         private File jsDocDirectory;
 
+        private File configFile;
+
         private File tempDirectory;
 
         private boolean debug = false;
@@ -185,6 +202,11 @@ public final class TaskContext {
 
         public Builder withJsDocDirectory(final File jsDocDirectory) {
             this.jsDocDirectory = jsDocDirectory;
+            return this;
+        }
+
+        public Builder withConfigFile(final File configFile) {
+            this.configFile = configFile;
             return this;
         }
 
@@ -253,7 +275,7 @@ public final class TaskContext {
 
             // this is getting a little out of hand...
             return new TaskContext(sourceRoots,
-                    outputDirectory, jsDocDirectory, tutorialsDirectory,
+                    outputDirectory, jsDocDirectory, tutorialsDirectory, configFile,
                     tempDirectory, debug, recursive, includePrivate, log);
         }
     }
