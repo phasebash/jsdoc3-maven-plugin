@@ -1,14 +1,13 @@
 package com.github.phasebash.jsdoc3.maven.tasks;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.maven.plugin.logging.SystemStreamLog;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.maven.plugin.logging.Log;
 
 /**
  * A Task which runs the jsdoc3 executable via Rhino.
@@ -28,6 +27,8 @@ final class JsDocTask implements Task {
      */
     @Override
     public void execute(TaskContext context) throws TaskException {
+        final Log log = context.getLog();
+
         final List<String> arguments = new LinkedList<String>();
 
         final File basePath = context.getJsDocDir();
@@ -64,6 +65,13 @@ final class JsDocTask implements Task {
 
         for (final File sourceFile : context.getSourceDir()) {
             arguments.add(sourceFile.toString());
+        }
+
+        if (log.isDebugEnabled()) {
+            int idx = 0;
+            for (String arg: arguments) {
+                log.debug("Rhino arg[" + (idx++) + "]" + arg);
+            }
         }
 
         Process process;
