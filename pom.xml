@@ -35,9 +35,11 @@
         <jsdoc.release.version>3.2</jsdoc.release.version>
 
         <junit.version>4.8.2</junit.version>
+        <easymock.version>3.1</easymock.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <siteLocation>file://${user.dir}/site</siteLocation>
+
     </properties>
 
     <prerequisites>
@@ -49,6 +51,14 @@
         <developerConnection>scm:git:git@github.com:phasebash/jsdoc3-maven-plugin.git</developerConnection>
         <url>git@github.com:phasebash/jsdoc3-maven-plugin.git</url>
     </scm>
+
+    <developers>
+        <developer>
+            <id>phasebash@gmail.com</id>
+            <email>phasebash@gmail.com</email>
+            <name>Brandon Zeeb</name>
+        </developer>
+    </developers>
 
     <dependencyManagement>
         <dependencies>
@@ -78,10 +88,28 @@
             </dependency>
 
             <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-utils</artifactId>
+                <version>${plexus.utils.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>${easymock.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymockclassextension</artifactId>
+                <version>${easymock.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

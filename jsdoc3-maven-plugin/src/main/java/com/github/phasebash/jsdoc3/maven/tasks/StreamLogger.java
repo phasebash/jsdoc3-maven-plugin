@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-class StreamLogger extends Thread {
+class StreamLogger implements Runnable {
 
     private final BufferedReader bufferedReader;
 
@@ -27,7 +27,7 @@ class StreamLogger extends Thread {
         String line;
         try {
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                log.info(line);
             }
         } catch (IOException e) {
             throw new TaskException("Exception while intercepting stream.", e);

@@ -61,6 +61,15 @@ Copyright (c) 2013 The Apache Software Foundation.
 The project page for org.apache.maven:maven-plugin-annotations is available at:
 http://commons.apache.org/proper/commons-io/
 
+## commons-lang:commons-lang ##
+
+commons-lang:commons-lang is distributed under the Apache 2.0 license.
+
+Copyright (c) 2013 The Apache Software Foundation.
+
+The project page for org.apache.maven:maven-plugin-annotations is available at:
+http://commons.apache.org/proper/commons-lang/
+
 ## Rhino ##
 
 The jsdoc3-maven-plugin utilizes a forked version of Mozilla's Rhino as produced by https://github.com/hegemonic

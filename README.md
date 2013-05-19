@@ -85,6 +85,8 @@ available through [Sonatype](http://www.sonatype.org/) and is synchronized with 
 * sourceFiles (Optional) - File[]: An Array of Files which will be included into the final jsdoc argument list.
 * outputDirectory (Optional) - File: The place where jsdoc should be written.  default: "${project.build.directory}/site/jsdoc"
 * includePrivate (Optional) - Boolean: A flag to indicate whether @private symbols are included in the generated documentation.
+* tutorialsDirectory (Optional) - File: A file indicating where [jsdoc tutorial](http://usejsdoc.org/about-tutorials.html) resources can be found.
+* configFile (Optional) - File: A [configuration](http://usejsdoc.org/about-configuring-jsdoc.html#configuration-file) file to be passed to jsdoc for more detailed project configuration.
 
 ## Questions, Feedback? ##
 Feel free to submit an issue ticket through github or contact me directly.  I will help you.

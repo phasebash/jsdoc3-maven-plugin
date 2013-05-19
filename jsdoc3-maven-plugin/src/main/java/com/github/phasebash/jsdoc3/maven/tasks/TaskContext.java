@@ -188,20 +188,40 @@ public final class TaskContext {
 
         private Log log;
 
+        public Builder() {
+            // do nothing
+        }
+
+        public Builder(Builder other) {
+            this.sourceFiles.addAll(other.sourceFiles);
+            this.directoryRoots.addAll(other.directoryRoots);
+            this.outputDirectory = other.outputDirectory;
+            this.jsDocDirectory = other.jsDocDirectory;
+            this.tempDirectory = other.tempDirectory;
+            this.debug = other.debug;
+            this.recursive = other.recursive;
+            this.includePrivate = other.includePrivate;
+            this.tutorialsDirectory = other.tutorialsDirectory;
+            this.log = other.log;
+        }
+
         public Builder withSourceFiles(final Collection<File> sourceFiles) {
             if (sourceFiles != null) {
                 this.sourceFiles.addAll(sourceFiles);
             }
+
             return this;
         }
 
         public Builder withOutputDirectory(final File outputDirectory) {
             this.outputDirectory = outputDirectory;
+
             return this;
         }
 
         public Builder withJsDocDirectory(final File jsDocDirectory) {
             this.jsDocDirectory = jsDocDirectory;
+
             return this;
         }
 
@@ -212,11 +232,13 @@ public final class TaskContext {
 
         public Builder withTempDirectory(final File tempDirectory) {
             this.tempDirectory = tempDirectory;
+
             return this;
         }
 
         public Builder withRecursive(final boolean recursive) {
             this.recursive = recursive;
+
             return this;
         }
 
@@ -228,28 +250,36 @@ public final class TaskContext {
          */
         public Builder withDebug(final boolean debug) {
             this.debug = debug;
+
             return this;
         }
 		
         public Builder withIncludePrivate(final boolean includePrivate) {
             this.includePrivate = includePrivate;
+
             return this;
         }
 
-        public void withDirectoryRoots(final Set<File> directoryRoots) {
+        public Builder withDirectoryRoots(final Set<File> directoryRoots) {
             if (directoryRoots != null) {
                 this.directoryRoots.addAll(directoryRoots);
             }
+
+            return this;
         }
 
-        public void withTutorialsDirectory(File tutorialsDirectory) {
+        public Builder withTutorialsDirectory(File tutorialsDirectory) {
             if (tutorialsDirectory != null && tutorialsDirectory.exists() && tutorialsDirectory.isDirectory()) {
                 this.tutorialsDirectory = tutorialsDirectory;
             }
+
+            return this;
         }
 
-        public void withLog(Log log) {
+        public Builder withLog(Log log) {
             this.log = log;
+
+            return this;
         }
 
         public TaskContext build() {
@@ -261,7 +291,7 @@ public final class TaskContext {
             sourceRoots.addAll(sourceFiles);
             sourceRoots.addAll(directoryRoots);
 
-            if (!outputDirectory.exists()) {
+            if (outputDirectory == null || !outputDirectory.exists()) {
                 throw new IllegalStateException("Output directory must exist.");
             }
 
