@@ -5,11 +5,10 @@
     <parent>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>jsdoc3-maven-plugin</artifactId>
-  <version>1.0.4</version>
 
     <name>JsDoc3 Maven Plugin</name>
     <description>A Maven Plugin to Generate JsDoc3 Documentation.</description>
