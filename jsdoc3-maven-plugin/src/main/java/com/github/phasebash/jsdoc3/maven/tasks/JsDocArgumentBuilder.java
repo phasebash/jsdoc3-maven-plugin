@@ -47,7 +47,7 @@ public class JsDocArgumentBuilder {
 
         if (context.getConfigFile() != null) {
             arguments.add("-c");
-            arguments.add(context.getConfigFile().toString());
+            arguments.add(asUriString(context.getConfigFile()));
         }
 
         if (context.isIncludePrivate()) {
