@@ -188,7 +188,6 @@
     <modules>
         <module>jsdoc3-maven-plugin</module>
         <module>jsdoc3-rhino</module>
-        <module>jsdoc3-example-projects</module>
     </modules>
 
 </project>
