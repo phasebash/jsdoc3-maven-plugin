@@ -5,10 +5,11 @@
     <parent>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
 
     <artifactId>jsdoc3-maven-plugin</artifactId>
+  <version>1.0.4</version>
 
     <name>JsDoc3 Maven Plugin</name>
     <description>A Maven Plugin to Generate JsDoc3 Documentation.</description>
@@ -35,7 +36,7 @@
         <dependency>
             <groupId>com.github.phasebash</groupId>
             <artifactId>jsdoc3-rhino</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.3</version>
             <scope>compile</scope>
         </dependency>
 
