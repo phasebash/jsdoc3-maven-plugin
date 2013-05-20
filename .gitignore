@@ -4,5 +4,7 @@
 *.jar
 *.war
 *.ear
-/jsdoc3-rhino/target/
-/jsdoc3-maven-plugin/target/
+*.iml
+*.ipr
+.idea
+target
