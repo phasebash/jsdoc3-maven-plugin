@@ -74,7 +74,7 @@ public class JsDocArgumentBuilder {
     }
 
     private String asUriString(final File file) {
-        return (File.separator.equals("/") ? "file://" : "file:/") + asNormalizedFileString(file);
+        return (File.separator.equals("/") ? "file://" : "file:/") + asNormalizedFileString(file).replace(" ", "%20");
     }
 
     private String replace(String string) {
