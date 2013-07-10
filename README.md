@@ -13,13 +13,13 @@ The following examples enumerate the most common POM configurations for the jsdo
 available through [Sonatype](http://www.sonatype.org/) and is synchronized with the central Maven repository.
 
 ## Release ##
-The current release version is 1.0.3, using jsdoc3 [3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.2).
+The current release version is 1.0.4, using jsdoc3 [3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.2).
 
 ### Example POM: Recurse subdirectories only ##
     <plugin>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <configuration>
             <recursive>true</recursive>
             <directoryRoots>
@@ -40,7 +40,7 @@ The current release version is 1.0.3, using jsdoc3 [3.2](https://github.com/jsdo
     <plugin>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <configuration>
             <recursive>true</recursive>
             <directoryRoots>
@@ -64,7 +64,7 @@ The current release version is 1.0.3, using jsdoc3 [3.2](https://github.com/jsdo
     <plugin>
         <groupId>com.github.phasebash</groupId>
         <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <configuration>
             <sourceFiles>
                 <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
