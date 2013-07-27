@@ -15,6 +15,9 @@ available through [Sonatype](http://www.sonatype.org/) and is synchronized with 
 ## Release ##
 The current release version is 1.0.4, using jsdoc3 [3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.2).
 
+## Current Status ##
+[![Build Status](https://travis-ci.org/phasebash/jsdoc3-maven-plugin.png)](https://travis-ci.org/phasebash/jsdoc3-maven-plugin)
+
 ### Example POM: Recurse subdirectories only ##
     <plugin>
         <groupId>com.github.phasebash</groupId>
