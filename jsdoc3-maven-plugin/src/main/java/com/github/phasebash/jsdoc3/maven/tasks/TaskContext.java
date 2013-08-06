@@ -4,6 +4,9 @@ import org.apache.maven.plugin.logging.Log;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * A context object representing the necessary values required to run jsdoc3.
@@ -11,7 +14,7 @@ import java.util.Arrays;
 public final class TaskContext {
 
     /** the source directory where sources can be found */
-    private final File[] sourceDir;
+    private final Collection<File> sourceDir;
 
     /** where jsdoc should be written */
     private final File outputDir;
@@ -55,7 +58,7 @@ public final class TaskContext {
      * @param includePrivate if private symbols should be included.
      * @param log            The logger.
      */
-    TaskContext(File[] sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory, File configFile,
+    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory, File configFile,
                 File tempDir, boolean debug, boolean recursive, boolean includePrivate, Log log) {
         this.sourceDir  = sourceDir;
         this.jsDocDir   = jsDocDir;
@@ -119,7 +122,7 @@ public final class TaskContext {
      *
      * @return The source directory.
      */
-    public File[] getSourceDir() {
+    public Collection<File> getSourceDir() {
         return sourceDir;
     }
 
@@ -164,9 +167,9 @@ public final class TaskContext {
      */
     public static class Builder {
 
-        private File[] sourceFiles = new File[0];
+        private Set<File> sourceFiles = new LinkedHashSet<File>();
 
-        private File[] directoryRoots = new File[0];
+        private Set<File> directoryRoots = new LinkedHashSet<File>();
 
         private File outputDirectory;
 
@@ -191,8 +194,8 @@ public final class TaskContext {
         }
 
         public Builder(Builder other) {
-            this.sourceFiles = other.sourceFiles.clone();
-            this.directoryRoots = other.directoryRoots.clone();
+            this.sourceFiles.addAll(other.sourceFiles);
+            this.directoryRoots.addAll(other.directoryRoots);
             this.outputDirectory = other.outputDirectory;
             this.jsDocDirectory = other.jsDocDirectory;
             this.tempDirectory = other.tempDirectory;
@@ -205,7 +208,7 @@ public final class TaskContext {
 
         public Builder withSourceFiles(final File[] sourceFiles) {
             if (sourceFiles != null) {
-                this.sourceFiles = sourceFiles;
+                this.sourceFiles.addAll(Arrays.asList(sourceFiles));
             }
 
             return this;
@@ -260,7 +263,7 @@ public final class TaskContext {
 
         public Builder withDirectoryRoots(final File[] directoryRoots) {
             if (directoryRoots != null) {
-                this.directoryRoots = directoryRoots;
+                this.directoryRoots.addAll(Arrays.asList(directoryRoots));
             }
 
             return this;
@@ -281,14 +284,13 @@ public final class TaskContext {
         }
 
         public TaskContext build() {
-            int totalLength = sourceFiles.length + directoryRoots.length;
-            if (totalLength == 0) {
+            if (sourceFiles.size() == 0 && directoryRoots.size() == 0) {
                 throw new IllegalArgumentException("sourceFiles and/or directoryRoots are required.");
             }
 
-            // Concatenate sourceFiles and directoryRoots into a single array
-            final File[] sourceRoots = Arrays.copyOf(sourceFiles, totalLength);
-            System.arraycopy(directoryRoots, 0, sourceRoots, sourceFiles.length, directoryRoots.length);
+            final Collection<File> sourceRoots = new LinkedHashSet<File>();
+            sourceRoots.addAll(sourceFiles);
+            sourceRoots.addAll(directoryRoots);
 
             if (outputDirectory == null || !outputDirectory.exists()) {
                 throw new IllegalStateException("Output directory must exist.");
