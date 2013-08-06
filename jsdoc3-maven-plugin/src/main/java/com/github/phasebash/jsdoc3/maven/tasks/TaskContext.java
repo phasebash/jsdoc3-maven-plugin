@@ -3,6 +3,7 @@ package com.github.phasebash.jsdoc3.maven.tasks;
 import org.apache.maven.plugin.logging.Log;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -205,9 +206,9 @@ public final class TaskContext {
             this.log = other.log;
         }
 
-        public Builder withSourceFiles(final Collection<File> sourceFiles) {
+        public Builder withSourceFiles(final File[] sourceFiles) {
             if (sourceFiles != null) {
-                this.sourceFiles.addAll(sourceFiles);
+                this.sourceFiles.addAll(Arrays.asList(sourceFiles));
             }
 
             return this;
@@ -260,9 +261,9 @@ public final class TaskContext {
             return this;
         }
 
-        public Builder withDirectoryRoots(final Set<File> directoryRoots) {
+        public Builder withDirectoryRoots(final File[] directoryRoots) {
             if (directoryRoots != null) {
-                this.directoryRoots.addAll(directoryRoots);
+                this.directoryRoots.addAll(Arrays.asList(directoryRoots));
             }
 
             return this;

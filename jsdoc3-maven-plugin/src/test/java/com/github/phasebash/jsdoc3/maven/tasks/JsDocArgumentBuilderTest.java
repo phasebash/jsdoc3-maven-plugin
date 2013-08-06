@@ -36,7 +36,7 @@ public class JsDocArgumentBuilderTest {
         builder = new JsDocArgumentBuilder();
 
         minimumContext = new TaskContext.Builder()
-                .withDirectoryRoots(new HashSet<File>(Arrays.asList(temporaryFolder.newFolder("dir1"))))
+                .withDirectoryRoots(new File[] { temporaryFolder.newFolder("dir1") })
                 .withJsDocDirectory(temporaryFolder.newFolder(JS_DOC_DIR_NAME))
                 .withOutputDirectory(temporaryFolder.newFolder("output"))
                 .withTempDirectory(temporaryFolder.newFolder("temp")).build();

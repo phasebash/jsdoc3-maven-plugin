@@ -26,11 +26,11 @@ public class JsDocMojo extends AbstractMojo {
 
     /** the directory where source files sit */
     @Parameter(required = false)
-    private Set<File> directoryRoots;
+    private File[] directoryRoots;
 
     /** the directory where source files sit */
     @Parameter(required = false)
-    private Set<File> sourceFiles;
+    private File[] sourceFiles;
 
     @Parameter(required = false)
     private boolean recursive = true;
