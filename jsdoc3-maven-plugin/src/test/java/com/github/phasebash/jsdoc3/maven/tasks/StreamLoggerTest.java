@@ -17,7 +17,7 @@ public class StreamLoggerTest {
 
     }
 
-    @Test(timeout = 100)
+    @Test(timeout = 1000)
     public void testSingleLine() {
         Log mockLog = EasyMock.createStrictMock(Log.class);
         mockLog.info("Two peas in a bucket.");
@@ -31,7 +31,7 @@ public class StreamLoggerTest {
         EasyMock.verify(mockLog);
     }
 
-    @Test(timeout = 100)
+    @Test(timeout = 1000)
     public void testTwoLines() {
         Log mockLog = EasyMock.createStrictMock(Log.class);
         mockLog.info("Two peas in a bucket.");
