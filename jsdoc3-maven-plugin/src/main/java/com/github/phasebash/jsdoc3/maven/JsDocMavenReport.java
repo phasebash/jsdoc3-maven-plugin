@@ -3,28 +3,40 @@ package com.github.phasebash.jsdoc3.maven;
 import com.github.phasebash.jsdoc3.maven.tasks.JsDocTasks;
 import com.github.phasebash.jsdoc3.maven.tasks.TaskContext;
 import com.github.phasebash.jsdoc3.maven.tasks.TaskException;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.doxia.siterenderer.Renderer;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.reporting.AbstractMavenReport;
+import org.apache.maven.reporting.MavenReportException;
 
 import java.io.File;
-
+import java.util.Locale;
 
 /**
- * A Mojo implementation which executes jsdoc3.
+ * Creates a JsDoc Report for the Maven Site.
  *
- * This Mojo will be removed with the 1.1.0 Release!
- *
- * @deprecated Use JsDocMavenReport
- * @see JsDocMavenReport
  */
-@Mojo(name = "_jsdoc3", defaultPhase = LifecyclePhase.SITE, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME)
-@Deprecated
-public class JsDocMojo extends AbstractMojo {
+@Mojo(name = "jsdoc3", defaultPhase = LifecyclePhase.SITE)
+public class JsDocMavenReport extends AbstractMavenReport {
+
+    /**
+     * <i>Maven Internal</i>: The Doxia Site Renderer.
+     *
+     * @component
+     */
+    private Renderer siteRenderer;
+
+    /**
+     * <i>Maven Internal</i>: Project to interact with.
+     *
+     * @parameter default-value="${project}"
+     * @required
+     * @readonly
+     */
+    private MavenProject project;
 
     /** the working directory */
     @Parameter(defaultValue = "${project.build.directory}/jsdoc3", readonly = true)
@@ -67,12 +79,23 @@ public class JsDocMojo extends AbstractMojo {
     @Parameter(required = false)
     private File configFile;
 
-    /**
-     * Execute the jsdoc3 Main.
-     *
-     * @throws MojoExecutionException If parameters aren't correct or if an error is occurred while running jsdoc.
-     */
-    public void execute() throws MojoExecutionException {
+    @Override
+    protected Renderer getSiteRenderer() {
+        return siteRenderer;
+    }
+
+    @Override
+    protected String getOutputDirectory() {
+        return "jsdoc/index";
+    }
+
+    @Override
+    protected MavenProject getProject() {
+        return project;
+    }
+
+    @Override
+    protected void executeReport(Locale locale) throws MavenReportException {
         final Log log = getLog();
 
         workingDirectory.mkdirs();
@@ -103,9 +126,29 @@ public class JsDocMojo extends AbstractMojo {
             log.info("jsdoc3 generation complete, please see " + outputDirectory + ".");
 
         } catch (IllegalArgumentException e) {
-            throw new MojoExecutionException("Invalid Mojo properties given in the plugin configuration.", e);
+            throw new MavenReportException("Invalid Mojo properties given in the plugin configuration.", e);
         } catch (TaskException e) {
-            throw new MojoExecutionException("Unable to run all JsDoc3 Tasks.", e);
+            throw new MavenReportException("Unable to run all JsDoc3 Tasks.", e);
         }
+    }
+
+    @Override
+    public String getOutputName() {
+        return "jsdoc/index";
+    }
+
+    @Override
+    public String getName(Locale locale) {
+        return "JsDocs";
+    }
+
+    @Override
+    public String getDescription(Locale locale) {
+        return "JsDoc API Documentation.";
+    }
+
+    @Override
+    public boolean isExternalReport() {
+        return true;
     }
 }
