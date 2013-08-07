@@ -37,6 +37,9 @@ public final class TaskContext {
     /** if we shall pass the -r flag to jsdoc. */
     private final boolean recursive;
 
+    /** if the jsdoc generator should tolerate errors (true), or fail on them (false). */
+    private final boolean lenient;
+
     /** if we shall pass the -p flag to jsdoc. */
     private final boolean includePrivate;
 
@@ -47,19 +50,20 @@ public final class TaskContext {
     /**
      * Private constructor.
      *
-     * @param sourceDir      the source dir.
-     * @param outputDir      the output dir.
-     * @param jsDocDir       the jsdoc dir.
-     * @param jsDocDir       the tutorials dir.
-     * @param configFile     the configuration file (i.e. conf.json).
-     * @param tempDir        the temp dir.
-     * @param debug          if debug mode should be used.
-     * @param recursive      if the jsdoc task should recursively look for jsfiles.
-     * @param includePrivate if private symbols should be included.
-     * @param log            The logger.
+     * @param sourceDir           the source dir.
+     * @param outputDir           the output dir.
+     * @param jsDocDir            the jsdoc dir.
+     * @param tutorialsDirectory  the tutorials dir.
+     * @param configFile          the configuration file (i.e. conf.json).
+     * @param tempDir             the temp dir.
+     * @param debug               if debug mode should be used.
+     * @param recursive           if the jsdoc task should recursively look for jsfiles.
+     * @param includePrivate      if private symbols should be included.
+     * @param lenient             if the generator should be lenient with errors.
+     * @param log                 The logger.
      */
     TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory, File configFile,
-                File tempDir, boolean debug, boolean recursive, boolean includePrivate, Log log) {
+                File tempDir, boolean debug, boolean recursive, boolean includePrivate, boolean lenient, Log log) {
         this.sourceDir  = sourceDir;
         this.jsDocDir   = jsDocDir;
         this.outputDir  = outputDir;
@@ -69,6 +73,7 @@ public final class TaskContext {
         this.debug      = debug;
         this.recursive  = recursive;
         this.includePrivate = includePrivate;
+        this.lenient = lenient;
         this.log = log;
     }
 
@@ -154,6 +159,17 @@ public final class TaskContext {
     }
 
     /**
+     * Should the generator tolerate errors (true) or fail on them (false).
+     *
+     * See: http://usejsdoc.org/about-commandline.html
+     *
+     * @return If so.
+     */
+    public boolean isLenient() {
+        return lenient;
+    }
+
+    /**
      * The logger.
      *
      * @return The logger.
@@ -184,6 +200,8 @@ public final class TaskContext {
         private boolean recursive = false;
 		
         private boolean includePrivate = false;
+
+        private boolean lenient;
 
         private File tutorialsDirectory;
 
@@ -261,6 +279,12 @@ public final class TaskContext {
             return this;
         }
 
+        public Builder withLeniency(boolean lenient) {
+            this.lenient = lenient;
+
+            return this;
+        }
+
         public Builder withDirectoryRoots(final File[] directoryRoots) {
             if (directoryRoots != null) {
                 this.directoryRoots.addAll(Arrays.asList(directoryRoots));
@@ -307,7 +331,7 @@ public final class TaskContext {
             // this is getting a little out of hand...
             return new TaskContext(sourceRoots,
                     outputDirectory, jsDocDirectory, tutorialsDirectory, configFile,
-                    tempDirectory, debug, recursive, includePrivate, log);
+                    tempDirectory, debug, recursive, includePrivate, lenient, log);
         }
     }
 }

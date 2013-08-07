@@ -50,20 +50,9 @@ public class JsDocMavenReport extends AbstractMavenReport {
     @Parameter(required = false)
     private File[] sourceFiles;
 
-    @Parameter(required = false)
-    private boolean recursive = true;
-
     /** the output directory for jsdoc */
     @Parameter(required = true, defaultValue = "${project.build.directory}/site/jsdoc")
     private File outputDirectory;
-
-    /** if debug mode should be invoked (includes debug rhino console) */
-    @Parameter(required = true, defaultValue = "false")
-    private boolean debug;
-
-    /** if private symbols should in included in documentation. */
-    @Parameter(required = true, defaultValue = "false")
-    private boolean includePrivate;
 
     /**
      * If a tutorials directory will be provided to jsdoc to resolve tutorial links.
@@ -78,6 +67,29 @@ public class JsDocMavenReport extends AbstractMavenReport {
      */
     @Parameter(required = false)
     private File configFile;
+
+    /**
+     * If the processor should recurse into directory roots.
+     */
+    @Parameter(required = false)
+    private boolean recursive = true;
+
+    /**
+     * Should errors in jsdoc fail the process (false), or should the generator
+     * be lenient to errors (true).
+     *
+     * See: http://usejsdoc.org/about-commandline.html
+     */
+    @Parameter(required = false)
+    private boolean lenient = false;
+
+    /** if debug mode should be invoked (includes debug rhino console) */
+    @Parameter(required = true, defaultValue = "false")
+    private boolean debug;
+
+    /** if private symbols should in included in documentation. */
+    @Parameter(required = true, defaultValue = "false")
+    private boolean includePrivate;
 
     @Override
     protected Renderer getSiteRenderer() {
@@ -107,6 +119,7 @@ public class JsDocMavenReport extends AbstractMavenReport {
         builder.withLog(log);
         builder.withDebug(debug);
         builder.withRecursive(recursive);
+        builder.withLeniency(lenient);
         builder.withIncludePrivate(includePrivate);
         builder.withSourceFiles(sourceFiles);
         builder.withDirectoryRoots(directoryRoots);

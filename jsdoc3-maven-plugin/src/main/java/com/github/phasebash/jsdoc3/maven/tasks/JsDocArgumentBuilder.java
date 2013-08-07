@@ -45,6 +45,10 @@ public class JsDocArgumentBuilder {
             arguments.add("-r");
         }
 
+        if (context.isLenient()) {
+            arguments.add("-l");
+        }
+
         if (context.getConfigFile() != null) {
             arguments.add("-c");
             arguments.add(context.getConfigFile().toString());

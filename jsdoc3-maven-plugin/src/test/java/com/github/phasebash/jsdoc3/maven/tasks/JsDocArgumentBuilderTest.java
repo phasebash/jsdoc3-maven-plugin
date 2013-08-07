@@ -16,8 +16,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class JsDocArgumentBuilderTest {
@@ -27,19 +25,23 @@ public class JsDocArgumentBuilderTest {
 
     private TaskContext minimumContext;
 
+    private TaskContext.Builder minimumBuilder;
+
     private JsDocArgumentBuilder builder;
-    
+
     private static final String JS_DOC_DIR_NAME = "jzdocz";
 
     @Before
     public void setUp() {
         builder = new JsDocArgumentBuilder();
 
-        minimumContext = new TaskContext.Builder()
+        minimumBuilder = new TaskContext.Builder()
                 .withDirectoryRoots(new File[] { temporaryFolder.newFolder("dir1") })
                 .withJsDocDirectory(temporaryFolder.newFolder(JS_DOC_DIR_NAME))
                 .withOutputDirectory(temporaryFolder.newFolder("output"))
-                .withTempDirectory(temporaryFolder.newFolder("temp")).build();
+                .withTempDirectory(temporaryFolder.newFolder("temp"));
+
+        minimumContext = minimumBuilder.build();
     }
 
     @Test
@@ -51,6 +53,26 @@ public class JsDocArgumentBuilderTest {
         assertModule(arguments);
         assertJsDocJs(arguments);
         assertDirName(arguments);
+
+        Assert.assertFalse(arguments.contains("-l"));
+    }
+
+    @Test
+    public void testLenientContext() {
+        TaskContext.Builder lenientBuilder = new TaskContext.Builder(minimumBuilder);
+        Assert.assertTrue(builder.build(lenientBuilder.withLeniency(true).build()).contains("-l"));
+    }
+
+    @Test
+    public void testContextWithConfig() {
+        TaskContext.Builder configBuilder = new TaskContext.Builder(minimumBuilder).withConfigFile(new File("config"));
+        Assert.assertTrue(builder.build(configBuilder.build()).contains("-c"));
+    }
+
+    @Test
+    public void testContextWithIncludePrivate() {
+        TaskContext.Builder configBuilder = new TaskContext.Builder(minimumBuilder).withIncludePrivate(true);
+        Assert.assertTrue(builder.build(configBuilder.build()).contains("-p"));
     }
 
     private void assertDirName(List<String> arguments) {
