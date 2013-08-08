@@ -99,6 +99,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.apache.maven.doxia</groupId>
+                <artifactId>doxia-sink-api</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons.io.version}</version>
