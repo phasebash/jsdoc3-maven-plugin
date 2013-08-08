@@ -41,6 +41,23 @@ Copyright (c) 2013 The Apache Software Foundation.
 The project page for org.apache.maven:maven-plugin-api is available at:
 http://maven.apache.org/ref/3-LATEST/maven-plugin-api/index.html
 
+## org.apache.maven.reporting:maven-reporting-api ##
+org.apache.maven.reporting:maven-reporting-api is distributed under the Apache 2.0 license.
+
+Copyright (c) 2013 The Apache Software Foundation.
+
+The project page for org.apache.maven:maven-plugin-annotations is available at:                                                         The project page for org.apache.maven:maven-plugin-annotations is available at:
+https://maven.apache.org/shared/maven-reporting-api/
+
+
+## org.apache.maven.reporting:maven-reporting-impl ##
+org.apache.maven.reporting:maven-reporting-impl is distributed under the Apache 2.0 license.
+
+Copyright (c) 2013 The Apache Software Foundation.
+
+The project page for org.apache.maven:maven-plugin-annotations is available at:
+https://maven.apache.org/shared/maven-reporting-impl/
+
 
 ## org.apache.maven.plugin-tools:maven-plugin-annotations ##
 
@@ -69,6 +86,16 @@ Copyright (c) 2013 The Apache Software Foundation.
 
 The project page for org.apache.maven:maven-plugin-annotations is available at:
 http://commons.apache.org/proper/commons-lang/
+
+## org.codehaus.plexus:plexus-utils ##
+
+org.codehaus.plexus:plexus-utils is distributed under the Apache 2.0 license.
+
+Copyright (c) 2013 The Apache Software Foundation.
+
+The project page for org.apache.maven:maven-plugin-annotations is available at:
+http://plexus.codehaus.org/plexus-utils/
+
 
 ## Rhino ##
 

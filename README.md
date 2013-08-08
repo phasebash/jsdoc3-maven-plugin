@@ -13,7 +13,7 @@ The following examples enumerate the most common POM configurations for the jsdo
 available through [Sonatype](http://www.sonatype.org/) and is synchronized with the central Maven repository.
 
 ## Release ##
-The current release version is 1.0.4, using jsdoc3 [3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.2).
+The current release version is 1.0.5, using jsdoc3 [3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.2).
 
 ## Deprecation Notice ##
 Usage of this plugin as a build plugin is now deprecated.  Support for execution of this plugin within project.build.plugins
@@ -23,71 +23,83 @@ will be dropped with release version 1.1.0.  Examples below reflect modern usage
 [![Build Status](https://travis-ci.org/phasebash/jsdoc3-maven-plugin.png)](https://travis-ci.org/phasebash/jsdoc3-maven-plugin)
 
 ### Example POM: Recurse subdirectories only ##
-    <plugin>
-        <groupId>com.github.phasebash</groupId>
-        <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>1.0.4</version>
-        <configuration>
-            <recursive>true</recursive>
-            <directoryRoots>
-                <directoryRoot>${basedir}/src/main/webapp/resources/js</directoryRoot>
-                <directoryRoot>${basedir}/src/main/javascript</directoryRoot>
-            </directoryRoots>
-        </configuration>
-        <executions>
-            <execution>
-                <goals>
-                    <goal>jsdoc3</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>com.github.phasebash</groupId>
+                <artifactId>jsdoc3-maven-plugin</artifactId>
+                <version>1.0.4</version>
+                <configuration>
+                    <recursive>true</recursive>
+                    <directoryRoots>
+                        <directoryRoot>${basedir}/src/main/webapp/resources/js</directoryRoot>
+                        <directoryRoot>${basedir}/src/main/javascript</directoryRoot>
+                    </directoryRoots>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jsdoc3</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </reporting>
 
 ### Example POM: Recurse subdirectories + errant files ##
-    <plugin>
-        <groupId>com.github.phasebash</groupId>
-        <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>1.0.4</version>
-        <configuration>
-            <recursive>true</recursive>
-            <directoryRoots>
-                <directoryRoot>${basedir}/src/main/webapp/resources/js</directoryRoot>
-                <directoryRoot>${basedir}/src/main/javascript</directoryRoot>
-            </directoryRoots>
-            <sourceFiles>
-                <sourceFile>${baseDir}/src/main/resources/js/classic.js</sourceFile>
-            </sourceFiles>
-        </configuration>
-        <executions>
-            <execution>
-                <goals>
-                    <goal>jsdoc3</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>com.github.phasebash</groupId>
+                <artifactId>jsdoc3-maven-plugin</artifactId>
+                <version>1.0.4</version>
+                <configuration>
+                    <recursive>true</recursive>
+                    <directoryRoots>
+                        <directoryRoot>${basedir}/src/main/webapp/resources/js</directoryRoot>
+                        <directoryRoot>${basedir}/src/main/javascript</directoryRoot>
+                    </directoryRoots>
+                    <sourceFiles>
+                        <sourceFile>${baseDir}/src/main/resources/js/classic.js</sourceFile>
+                    </sourceFiles>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jsdoc3</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </reporting>
 
 ### Example POM: Cherry pick ##
-    <plugin>
-        <groupId>com.github.phasebash</groupId>
-        <artifactId>jsdoc3-maven-plugin</artifactId>
-        <version>1.0.4</version>
-        <configuration>
-            <sourceFiles>
-                <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
-                <sourceFile>${baseDir}/src/main/resources/js/header.js</sourceFile>
-                <sourceFile>${baseDir}/src/main/resources/js/content.js</sourceFile>
-                <sourceFile>${baseDir}/src/main/resources/js/ads.js</sourceFile>
-            </sourceFiles>
-        </configuration>
-        <executions>
-            <execution>
-                <goals>
-                    <goal>jsdoc3</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>com.github.phasebash</groupId>
+                <artifactId>jsdoc3-maven-plugin</artifactId>
+                <version>1.0.4</version>
+                <configuration>
+                    <sourceFiles>
+                        <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
+                        <sourceFile>${baseDir}/src/main/resources/js/header.js</sourceFile>
+                        <sourceFile>${baseDir}/src/main/resources/js/content.js</sourceFile>
+                        <sourceFile>${baseDir}/src/main/resources/js/ads.js</sourceFile>
+                    </sourceFiles>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jsdoc3</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </reporting>
 
 ## Mojo Parameters ##
 * directoryRoots - File[]: An Array of Files which will be used as directory roots, any file within this directory will be included into the final jsdoc argument list.

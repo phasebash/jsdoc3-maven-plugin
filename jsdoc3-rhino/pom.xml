@@ -32,7 +32,7 @@
                         <configuration>
                             <serverId>jsdoc3-github-master</serverId>
                             <url>https://github.com</url>
-                            <fromFile>jsdoc3/jsdoc/archive/releases/${jsdoc.release.version}.zip</fromFile>
+                            <fromFile>jsdoc3/jsdoc/archive/releases/${jsdoc-release-version}.zip</fromFile>
                             <toDir>${project.build.directory}/jsdoc3</toDir>
                         </configuration>
                     </execution>
@@ -51,12 +51,12 @@
                                 <!--
                                     Unpack the release
                                 -->
-                                <unzip src="${project.build.directory}/jsdoc3/${jsdoc.release.version}.zip" dest="${project.build.directory}/jsdoc3/" />
+                                <unzip src="${project.build.directory}/jsdoc3/${jsdoc-release-version}.zip" dest="${project.build.directory}/jsdoc3/" />
 
                                 <!--
                                     What is yours is now mine
                                 -->
-                                <unzip src="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc.release.version}/rhino/js.jar" dest="${project.build.directory}/classes" />
+                                <unzip src="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc-release-version}/rhino/js.jar" dest="${project.build.directory}/classes" />
                             </target>
                         </configuration>
                         <goals>

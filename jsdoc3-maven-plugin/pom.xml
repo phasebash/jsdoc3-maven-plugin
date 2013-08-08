@@ -129,7 +129,7 @@
                         <configuration>
                             <serverId>jsdoc3-github-master</serverId>
                             <url>https://github.com</url>
-                            <fromFile>jsdoc3/jsdoc/archive/releases/${jsdoc.release.version}.zip</fromFile>
+                            <fromFile>jsdoc3/jsdoc/archive/releases/${jsdoc-release-version}.zip</fromFile>
                             <toDir>${project.build.directory}/jsdoc3</toDir>
                         </configuration>
                     </execution>
@@ -146,7 +146,7 @@
                         <configuration>
                             <target>
                                 <echo message="unpacking jsdoc3 zip and removing binaries" />
-                                <unzip src="${project.build.directory}/jsdoc3/${jsdoc.release.version}.zip" dest="${project.build.directory}/jsdoc3/" />
+                                <unzip src="${project.build.directory}/jsdoc3/${jsdoc-release-version}.zip" dest="${project.build.directory}/jsdoc3/" />
 
                                 <!--
                                     As long as we are invoking the provided executable, we need to retain this jar.
@@ -156,7 +156,7 @@
                                              <!--includes="**/*.jar" />-->
                                 <!--</delete>-->
 
-                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/jsdoc.zip" basedir="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc.release.version}" />
+                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/jsdoc.zip" basedir="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc-release-version}" />
                             </target>
                         </configuration>
                         <goals>

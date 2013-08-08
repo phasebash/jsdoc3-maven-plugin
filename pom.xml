@@ -26,34 +26,35 @@
 
     <properties>
         <!--maven, plugin, and lang versions-->
-        <java.version>1.6</java.version>
-        <maven-release-plugin.version>2.4.1</maven-release-plugin.version>
-        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-        <maven-site-plugin.version>3.0</maven-site-plugin.version>
-        <wagon-maven-plugin.version>1.0-beta-4</wagon-maven-plugin.version>
-        <maven.version>3.0.3</maven.version>
+        <java-version>1.6</java-version>
+        <maven-release-plugin-version>2.4.1</maven-release-plugin-version>
+        <maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
+        <maven-site-plugin-version>3.0</maven-site-plugin-version>
+        <wagon-maven-plugin-version>1.0-beta-4</wagon-maven-plugin-version>
+        <maven-version>3.0.3</maven-version>
         <maven-reporting-api-version>3.0</maven-reporting-api-version>
         <maven-reporting-impl-version>2.2</maven-reporting-impl-version>
+        <doxia-sink-api-version>1.2</doxia-sink-api-version>
 
         <!--library versions-->
-        <maven.plugin.tools.version>3.1</maven.plugin.tools.version>
-        <plexus.utils.version>3.0.5</plexus.utils.version>
-        <commons.io.version>2.4</commons.io.version>
-        <commons.lang.version>2.6</commons.lang.version>
+        <maven-plugin-tools-version>3.1</maven-plugin-tools-version>
+        <plexus-utils-version>3.0.5</plexus-utils-version>
+        <commons-io-version>2.4</commons-io-version>
+        <commons-lang-version>2.6</commons-lang-version>
 
         <!--jsdoc versions-->
-        <jsdoc.release.version>3.2</jsdoc.release.version>
+        <jsdoc-release-version>3.2</jsdoc-release-version>
 
         <!--test versions-->
-        <junit.version>4.8.2</junit.version>
-        <easymock.version>3.1</easymock.version>
+        <junit-version>4.8.2</junit-version>
+        <easymock-version>3.1</easymock-version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <siteLocation>file://${user.dir}/site</siteLocation>
     </properties>
 
     <prerequisites>
-        <maven>${maven.version}</maven>
+        <maven>${maven-version}</maven>
     </prerequisites>
 
     <scm>
@@ -72,24 +73,31 @@
     </developers>
 
     <dependencyManagement>
+
         <dependencies>
 
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-plugin-api</artifactId>
-                <version>${maven.version}</version>
+                <version>${maven-version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.maven.plugin-tools</groupId>
                 <artifactId>maven-plugin-annotations</artifactId>
-                <version>${maven.plugin.tools.version}</version>
+                <version>${maven-plugin-tools-version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.maven.reporting</groupId>
                 <artifactId>maven-reporting-api</artifactId>
                 <version>${maven-reporting-api-version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-sink-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -101,48 +109,50 @@
             <dependency>
                 <groupId>org.apache.maven.doxia</groupId>
                 <artifactId>doxia-sink-api</artifactId>
-                <version>1.2</version>
+                <version>${doxia-sink-api-version}</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>${commons.io.version}</version>
+                <version>${commons-io-version}</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
-                <version>${commons.lang.version}</version>
+                <version>${commons-lang-version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.codehaus.plexus</groupId>
                 <artifactId>plexus-utils</artifactId>
-                <version>${plexus.utils.version}</version>
+                <version>${plexus-utils-version}</version>
             </dependency>
 
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <version>${junit-version}</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
-                <version>${easymock.version}</version>
+                <version>${easymock-version}</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymockclassextension</artifactId>
-                <version>${easymock.version}</version>
+                <version>${easymock-version}</version>
                 <scope>test</scope>
             </dependency>
+
         </dependencies>
+
     </dependencyManagement>
 
     <build>
@@ -150,7 +160,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>${maven-release-plugin.version}</version>
+                <version>${maven-release-plugin-version}</version>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -158,16 +168,16 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
+                    <version>${maven-compiler-plugin-version}</version>
                     <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                        <source>${java-version}</source>
+                        <target>${java-version}</target>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven-site-plugin.version}</version>
+                    <version>${maven-site-plugin-version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -189,7 +199,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>wagon-maven-plugin</artifactId>
-                    <version>${wagon-maven-plugin.version}</version>
+                    <version>${wagon-maven-plugin-version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
