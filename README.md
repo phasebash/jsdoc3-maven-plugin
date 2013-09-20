@@ -28,7 +28,7 @@ will be dropped with release version 1.1.0.  Examples below reflect modern usage
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.4</version>
+                <version>1.0.5</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -53,7 +53,7 @@ will be dropped with release version 1.1.0.  Examples below reflect modern usage
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.4</version>
+                <version>1.0.5</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -81,7 +81,7 @@ will be dropped with release version 1.1.0.  Examples below reflect modern usage
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.4</version>
+                <version>1.0.5</version>
                 <configuration>
                     <sourceFiles>
                         <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
