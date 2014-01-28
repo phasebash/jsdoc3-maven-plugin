@@ -46,6 +46,9 @@ public final class TaskContext {
     /** the logger. */
     private final Log log;
 
+    /** the possibly null template directory. */
+    private final File templateDirectory;
+
     /**
     /**
      * Private constructor.
@@ -62,12 +65,14 @@ public final class TaskContext {
      * @param lenient             if the generator should be lenient with errors.
      * @param log                 The logger.
      */
-    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory, File configFile,
+    TaskContext(Collection<File> sourceDir, File outputDir, File jsDocDir, File tutorialsDirectory,
+                File templateDirectory, File configFile,
                 File tempDir, boolean debug, boolean recursive, boolean includePrivate, boolean lenient, Log log) {
         this.sourceDir  = sourceDir;
         this.jsDocDir   = jsDocDir;
         this.outputDir  = outputDir;
         this.tutorialsDirectory = tutorialsDirectory;
+        this.templateDirectory = templateDirectory;
         this.configFile = configFile;
         this.tempDir    = tempDir;
         this.debug      = debug;
@@ -111,6 +116,15 @@ public final class TaskContext {
      */
     public File getTutorialsDirectory() {
         return tutorialsDirectory;
+    }
+
+    /**
+     * Get the (possibly null) template directory.
+     *
+     * @return The template directory.
+     */
+    public File getTemplateDirectory() {
+        return templateDirectory;
     }
 
     /**
@@ -204,6 +218,8 @@ public final class TaskContext {
         private boolean lenient;
 
         private File tutorialsDirectory;
+
+        private File templateDirectory;
 
         private Log log;
 
@@ -307,6 +323,12 @@ public final class TaskContext {
             return this;
         }
 
+        public Builder withTemplateDirectory(File templateDirectory) {
+            this.templateDirectory = templateDirectory;
+
+            return this;
+        }
+
         public TaskContext build() {
             if (sourceFiles.size() == 0 && directoryRoots.size() == 0) {
                 throw new IllegalArgumentException("sourceFiles and/or directoryRoots are required.");
@@ -330,8 +352,9 @@ public final class TaskContext {
 
             // this is getting a little out of hand...
             return new TaskContext(sourceRoots,
-                    outputDirectory, jsDocDirectory, tutorialsDirectory, configFile,
+                    outputDirectory, jsDocDirectory, tutorialsDirectory, templateDirectory, configFile,
                     tempDirectory, debug, recursive, includePrivate, lenient, log);
         }
+
     }
 }

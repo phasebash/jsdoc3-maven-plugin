@@ -19,7 +19,7 @@ import java.util.Locale;
  * Creates a JsDoc Report for the Maven Site.
  *
  */
-@Mojo(name = "jsdoc3", defaultPhase = LifecyclePhase.SITE)
+@Mojo(name = "report", defaultPhase = LifecyclePhase.SITE)
 public class JsDocMavenReport extends AbstractMavenReport {
 
     /**
@@ -67,6 +67,13 @@ public class JsDocMavenReport extends AbstractMavenReport {
      */
     @Parameter(required = false)
     private File configFile;
+
+    /**
+     * If a template file will be provided to jsdoc.
+     * see: http://usejsdoc.org/about-commandline.html
+     */
+    @Parameter(required = false)
+    private File templateDirectory;
 
     /**
      * If the processor should recurse into directory roots.
@@ -127,6 +134,7 @@ public class JsDocMavenReport extends AbstractMavenReport {
         builder.withTempDirectory(workingDirectory);
         builder.withJsDocDirectory(jsDoc3Dir);
         builder.withTutorialsDirectory(tutorialsDirectory);
+        builder.withTemplateDirectory(templateDirectory);
         builder.withConfigFile(configFile);
 
         try {

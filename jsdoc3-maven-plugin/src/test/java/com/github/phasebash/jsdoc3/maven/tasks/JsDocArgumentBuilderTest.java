@@ -75,6 +75,14 @@ public class JsDocArgumentBuilderTest {
         Assert.assertTrue(builder.build(configBuilder.build()).contains("-p"));
     }
 
+    @Test
+    public void testContextWithTemplate() {
+        TaskContext.Builder configBuilder = new TaskContext.Builder(minimumBuilder)
+            .withTemplateDirectory(new File("foo/bar"));
+
+        Assert.assertTrue(builder.build(configBuilder.build()).contains("-t"));
+    }
+
     private void assertDirName(List<String> arguments) {
         Assert.assertEquals("dirname", "--dirname=" + path("/", directory(), JS_DOC_DIR_NAME), arguments.get(13));
     }

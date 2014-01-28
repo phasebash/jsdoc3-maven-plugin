@@ -63,6 +63,11 @@ public class JsDocArgumentBuilder {
             arguments.add(context.getTutorialsDirectory().toString());
         }
 
+        if (context.getTemplateDirectory() != null) {
+            arguments.add("-t");
+            arguments.add(context.getTemplateDirectory().toString());
+        }
+
         arguments.add("-d");
         arguments.add(context.getOutputDir().toString());
 

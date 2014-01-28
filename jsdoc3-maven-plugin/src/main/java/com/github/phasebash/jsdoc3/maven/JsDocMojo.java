@@ -17,13 +17,9 @@ import java.io.File;
 /**
  * A Mojo implementation which executes jsdoc3.
  *
- * This Mojo will be removed with the 1.1.0 Release!
- *
- * @deprecated Use JsDocMavenReport
  * @see JsDocMavenReport
  */
-@Mojo(name = "_jsdoc3", defaultPhase = LifecyclePhase.SITE, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME)
-@Deprecated
+@Mojo(name = "jsdoc3", defaultPhase = LifecyclePhase.SITE, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME)
 public class JsDocMojo extends AbstractMojo {
 
     /** the working directory */
@@ -68,6 +64,22 @@ public class JsDocMojo extends AbstractMojo {
     private File configFile;
 
     /**
+     * If a template file will be provided to jsdoc.
+     * see: http://usejsdoc.org/about-commandline.html
+     */
+    @Parameter(required = false)
+    private File templateDirectory;
+
+    /**
+     * Should errors in jsdoc fail the process (false), or should the generator
+     * be lenient to errors (true).
+     *
+     * See: http://usejsdoc.org/about-commandline.html
+     */
+    @Parameter(required = false)
+    private boolean lenient = false;
+
+    /**
      * Execute the jsdoc3 Main.
      *
      * @throws MojoExecutionException If parameters aren't correct or if an error is occurred while running jsdoc.
@@ -84,6 +96,7 @@ public class JsDocMojo extends AbstractMojo {
         builder.withLog(log);
         builder.withDebug(debug);
         builder.withRecursive(recursive);
+        builder.withLeniency(lenient);
         builder.withIncludePrivate(includePrivate);
         builder.withSourceFiles(sourceFiles);
         builder.withDirectoryRoots(directoryRoots);
@@ -91,6 +104,7 @@ public class JsDocMojo extends AbstractMojo {
         builder.withTempDirectory(workingDirectory);
         builder.withJsDocDirectory(jsDoc3Dir);
         builder.withTutorialsDirectory(tutorialsDirectory);
+        builder.withTemplateDirectory(templateDirectory);
         builder.withConfigFile(configFile);
 
         try {

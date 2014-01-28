@@ -23,7 +23,7 @@ public class CopyTaskTest {
     @Test
     public void testCopyDirDoesntExist() {
         final File tempFile = new File(temporaryFolder.getRoot(), "rooty");
-        final TaskContext context = new TaskContext(null, null, null, null, null, tempFile, false, true, false, true, null);
+        final TaskContext context = new TaskContext(null, null, null, null, null, null, tempFile, false, true, false, true, null);
         copyTask.execute(context);
         Assert.assertTrue("jsdoc.zip should exist.", new File(tempFile, "jsdoc.zip").exists());
     }
@@ -32,7 +32,7 @@ public class CopyTaskTest {
     public void testCopyDirExists() {
         final File tempFile = new File(temporaryFolder.getRoot(), "rooty");
         tempFile.mkdirs();
-        final TaskContext context = new TaskContext(null, null, null, null, null, tempFile, false, true, false, false, null);
+        final TaskContext context = new TaskContext(null, null, null, null, null, null, tempFile, false, true, false, false, null);
         copyTask.execute(context);
         Assert.assertTrue("jsdoc.zip should exist.", new File(tempFile, "jsdoc.zip").exists());
     }
@@ -40,7 +40,7 @@ public class CopyTaskTest {
     @Test
     public void testCopyFileSize() {
         final File tempFile = new File(temporaryFolder.getRoot(), "rooty");
-        final TaskContext context = new TaskContext(null, null, null, null, null, tempFile, false, true, false, true, null);
+        final TaskContext context = new TaskContext(null, null, null, null, null, null, tempFile, false, true, false, true, null);
         copyTask.execute(context);
         Assert.assertTrue("jsdoc.zip should exist.", new File(tempFile, "jsdoc.zip").exists());
 

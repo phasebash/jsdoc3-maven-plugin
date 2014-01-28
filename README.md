@@ -15,10 +15,6 @@ available through [Sonatype](http://www.sonatype.org/) and is synchronized with 
 ## Release ##
 The current release version is 1.0.5, using jsdoc3 [3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.2).
 
-## Deprecation Notice ##
-Usage of this plugin as a build plugin is now deprecated.  Support for execution of this plugin within project.build.plugins
-will be dropped with release version 1.1.0.  Examples below reflect modern usage as a reporting plugin.
-
 ## Current Status ##
 [![Build Status](https://travis-ci.org/phasebash/jsdoc3-maven-plugin.png)](https://travis-ci.org/phasebash/jsdoc3-maven-plugin)
 
@@ -109,6 +105,7 @@ will be dropped with release version 1.1.0.  Examples below reflect modern usage
 * outputDirectory (Optional) - File: The place where jsdoc should be written.  default: "${project.build.directory}/site/jsdoc"
 * includePrivate (Optional) - Boolean: A flag to indicate whether @private symbols are included in the generated documentation.
 * tutorialsDirectory (Optional) - File: A file indicating where [jsdoc tutorial](http://usejsdoc.org/about-tutorials.html) resources can be found.
+* templateDirectory (Optional) - File: A file inddicating where [jsdoc templates]() resources can be found.
 * configFile (Optional) - File: A [configuration](http://usejsdoc.org/about-configuring-jsdoc.html#configuration-file) file to be passed to jsdoc for more detailed project configuration.
 
 ## Questions, Feedback? ##
