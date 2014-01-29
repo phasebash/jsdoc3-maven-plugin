@@ -13,7 +13,7 @@ The following examples enumerate the most common POM configurations for the jsdo
 available through [Sonatype](http://www.sonatype.org/) and is synchronized with the central Maven repository.
 
 ## Release ##
-The current release version is 1.0.5, using jsdoc3 [3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.2).
+The current release version is 1.0.6, using jsdoc3 [3.3](https://github.com/jsdoc3/jsdoc/branches/releases/3.3).
 
 ## Current Status ##
 [![Build Status](https://travis-ci.org/phasebash/jsdoc3-maven-plugin.png)](https://travis-ci.org/phasebash/jsdoc3-maven-plugin)
