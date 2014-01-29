@@ -4,9 +4,16 @@ jsdoc3-maven-plugin
 An automatic documentation generator for JavaScript within the Maven Reporting lifecycle.
 
 ## What is the jsdoc3-maven-plugin? ##
-The jsdoc3-maven-plugin is a [modern maven plugin](http://maven.apache.org/plugin-tools/maven-plugin-plugin/examples/using-annotations.html)
-built for the purposes of generating [jsdoc](http://usejsdoc.org/) along with the Maven Reporting lifecycle.  By default, the
-plugin will bind to the _site_ phase, though this is configurable as with any other Maven plugin with goals.
+The jsdoc3-maven-plugin is a [maven plugin](http://maven.apache.org/plugin-tools/maven-plugin-plugin/examples/using-annotations.html)
+and [maven report](http://maven.apache.org/ref/2.2.1/maven-reporting/maven-reporting-api/apidocs/org/apache/maven/reporting/MavenReport.html)
+built for the purposes of generating [jsdoc](http://usejsdoc.org/) along with a Maven Build, or
+Maven Reporting lifecycle.  By default, the plugin will bind to the _site_ phase when used as a Maven Mojo or Maven Report,
+though this is configurable as with any other Maven plugin with goals.
+
+## Why Maven Mojo and Maven Report? ##
+It has been requested by enough users that we should provide both a Maven Mojo for people who prefer to generate
+documentation using the command line or don't care about producing a complete site, while other users prefer to simply
+generate a complete Maven Site with JSDoc included.
 
 ## Getting Started ##
 The following examples enumerate the most common POM configurations for the jsdoc3-maven-plugin.  This plugin is made
@@ -18,13 +25,18 @@ The current release version is 1.0.6, using jsdoc3 [3.3](https://github.com/jsdo
 ## Current Status ##
 [![Build Status](https://travis-ci.org/phasebash/jsdoc3-maven-plugin.png)](https://travis-ci.org/phasebash/jsdoc3-maven-plugin)
 
+## Example Configurations ##
+The jsdoc3-maven-plugin can fit into both the Maven Build and Maven Report lifecycle and offers 
+both a Mojo and MavenReport which provide the same API.  The snippets of POM configuration below can be placed both
+within reporting.plugins as well as build.plugins.
+
 ### Example POM: Recurse subdirectories only ##
     <reporting>
         <plugins>
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -49,7 +61,7 @@ The current release version is 1.0.6, using jsdoc3 [3.3](https://github.com/jsdo
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -77,7 +89,7 @@ The current release version is 1.0.6, using jsdoc3 [3.3](https://github.com/jsdo
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6</version>
                 <configuration>
                     <sourceFiles>
                         <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
@@ -96,6 +108,11 @@ The current release version is 1.0.6, using jsdoc3 [3.3](https://github.com/jsdo
             </plugin>
         </plugins>
     </reporting>
+    
+### Commandline ###
+Run the Mojo.
+
+    mvn clean jsdoc3:jsdoc3
 
 ## Mojo Parameters ##
 * directoryRoots - File[]: An Array of Files which will be used as directory roots, any file within this directory will be included into the final jsdoc argument list.
@@ -114,3 +131,14 @@ Feel free to submit an issue ticket through github or contact me directly.  I wi
 ## License ##
 The jsdoc3-maven-plugin has been released under [Apache 2.0](https://github.com/phasebash/jsdoc3-maven-plugin/blob/master/LICENSE.md) as per all it's dependencies.
 
+## Future Enhancements and Limitations ##
+We still have work to do...
+
+### Enhancements ###
+* Migrate Mojo, Maven Report, and Task classes to Groovy
+* Consolidate duplicated Plexus parameters between Mojo and Maven Report (using Groovy)
+* Support remaining command line arguments
+
+### Limitations ###
+* Test coverage could be better
+* Missing Mojo integration tests (so fix it already)
