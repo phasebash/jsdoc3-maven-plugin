@@ -71,7 +71,7 @@
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.7-SNAPSHOT</version>
+                <version>1.0.7</version>
                 <configuration>
                     <lenient>true</lenient>
                     <directoryRoots>
