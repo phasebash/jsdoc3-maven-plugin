@@ -44,13 +44,6 @@ within reporting.plugins as well as build.plugins.
                         <directoryRoot>${basedir}/src/main/javascript</directoryRoot>
                     </directoryRoots>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jsdoc3</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </reporting>
@@ -72,13 +65,6 @@ within reporting.plugins as well as build.plugins.
                         <sourceFile>${baseDir}/src/main/resources/js/classic.js</sourceFile>
                     </sourceFiles>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jsdoc3</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </reporting>
@@ -98,13 +84,6 @@ within reporting.plugins as well as build.plugins.
                         <sourceFile>${baseDir}/src/main/resources/js/ads.js</sourceFile>
                     </sourceFiles>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jsdoc3</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </reporting>
