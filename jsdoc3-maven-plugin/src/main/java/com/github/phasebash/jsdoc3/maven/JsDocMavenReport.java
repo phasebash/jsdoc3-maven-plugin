@@ -98,6 +98,13 @@ public class JsDocMavenReport extends AbstractMavenReport {
     @Parameter(required = true, defaultValue = "false")
     private boolean includePrivate;
 
+	/**
+	 * Specifies whether the JSDoc generation should be skipped
+	 */
+	@Parameter( property = "maven.jsdoc.skip", defaultValue = "false" )
+	protected boolean skip;
+		
+	
     @Override
     protected Renderer getSiteRenderer() {
         return siteRenderer;
@@ -117,6 +124,11 @@ public class JsDocMavenReport extends AbstractMavenReport {
     protected void executeReport(Locale locale) throws MavenReportException {
         final Log log = getLog();
 
+		if ( skip ) {
+			log.info( "Skipping jsdoc generation" );
+			return;
+		}
+		
         workingDirectory.mkdirs();
         outputDirectory.mkdirs();
 
