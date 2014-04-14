@@ -79,6 +79,12 @@ public class JsDocMojo extends AbstractMojo {
     @Parameter(required = false)
     private boolean lenient = false;
 
+	/**
+	 * Specifies whether the JSDoc generation should be skipped
+	 */
+	@Parameter( property = "maven.jsdoc.skip", defaultValue = "false" )
+	protected boolean skip;
+	
     /**
      * Execute the jsdoc3 Main.
      *
@@ -87,7 +93,13 @@ public class JsDocMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException {
         final Log log = getLog();
 
-        workingDirectory.mkdirs();
+		if ( skip )
+		{
+			log.info( "Skipping jsdoc generation" );
+			return;
+		}
+
+		workingDirectory.mkdirs();
         outputDirectory.mkdirs();
 
         final File jsDoc3Dir = new File(workingDirectory, "jsdoc");
