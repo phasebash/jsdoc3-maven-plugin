@@ -36,7 +36,7 @@ within reporting.plugins as well as build.plugins.
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>1.0.8</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -54,7 +54,7 @@ within reporting.plugins as well as build.plugins.
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>1.0.8</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -75,7 +75,7 @@ within reporting.plugins as well as build.plugins.
             <plugin>
                 <groupId>com.github.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>1.0.8</version>
                 <configuration>
                     <sourceFiles>
                         <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
@@ -103,6 +103,9 @@ Run the Mojo.
 * tutorialsDirectory (Optional) - File: A file indicating where [jsdoc tutorial](http://usejsdoc.org/about-tutorials.html) resources can be found.
 * templateDirectory (Optional) - File: A file inddicating where [jsdoc templates]() resources can be found.
 * configFile (Optional) - File: A [configuration](http://usejsdoc.org/about-configuring-jsdoc.html#configuration-file) file to be passed to jsdoc for more detailed project configuration.
+
+## System Properties ##
+* maven.jsdoc.skip - Boolean: A flag to skip JSDoc reporting.  Utilized by both the Maven Report and Mojo.
 
 ## Questions, Feedback? ##
 Feel free to submit an issue ticket through github or contact me directly.  I will help you.
