@@ -10,7 +10,7 @@
         </license>
     </licenses>
 
-    <groupId>com.github.phasebash</groupId>
+    <groupId>com.phasebash</groupId>
     <artifactId>jsdoc3-example-reporting-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -69,7 +69,7 @@
                 <version>2.5.1</version>
             </plugin>
             <plugin>
-                <groupId>com.github.phasebash</groupId>
+                <groupId>com.phasebash</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
                 <version>1.0.7</version>
                 <configuration>

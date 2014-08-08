@@ -20,7 +20,7 @@ The following examples enumerate the most common POM configurations for the jsdo
 available through [Sonatype](http://www.sonatype.org/) and is synchronized with the central Maven repository.
 
 ## Release ##
-The current release version is 1.0.9, using jsdoc3 [3.3](https://github.com/jsdoc3/jsdoc/branches/releases/3.3).
+The current release version is 1.1.0, using jsdoc3 [3.3](https://github.com/jsdoc3/jsdoc/branches/releases/3.3).
 
 ## Current Status ##
 [![Build Status](https://travis-ci.org/phasebash/jsdoc3-maven-plugin.png)](https://travis-ci.org/phasebash/jsdoc3-maven-plugin)
@@ -34,9 +34,9 @@ within reporting.plugins as well as build.plugins.
     <reporting>
         <plugins>
             <plugin>
-                <groupId>com.github.phasebash</groupId>
+                <groupId>com.phasebash.jsdoc</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.9</version>
+                <version>1.1.0</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -52,9 +52,9 @@ within reporting.plugins as well as build.plugins.
     <reporting>
         <plugins>
             <plugin>
-                <groupId>com.github.phasebash</groupId>
+                <groupId>com.phasebash.jsdoc</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.9</version>
+                <version>1.1.0</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -73,9 +73,9 @@ within reporting.plugins as well as build.plugins.
     <reporting>
         <plugins>
             <plugin>
-                <groupId>com.github.phasebash</groupId>
+                <groupId>com.phasebash.jsdoc</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.0.9</version>
+                <version>1.1.0</version>
                 <configuration>
                     <sourceFiles>
                         <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
