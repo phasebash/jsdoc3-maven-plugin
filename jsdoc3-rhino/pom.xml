@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.phasebash.jsdoc</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>jsdoc3-rhino</artifactId>
@@ -56,7 +56,7 @@
                                 <!--
                                     What is yours is now mine
                                 -->
-                                <unzip src="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc-release-version}/rhino/js.jar" dest="${project.build.directory}/classes" />
+                                <unzip src="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc-release-major-version}/rhino/js.jar" dest="${project.build.directory}/classes" />
                             </target>
                         </configuration>
                         <goals>

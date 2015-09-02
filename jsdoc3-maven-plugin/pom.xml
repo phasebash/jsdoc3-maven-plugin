@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.phasebash.jsdoc</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>jsdoc3-maven-plugin</artifactId>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>com.phasebash.jsdoc</groupId>
             <artifactId>jsdoc3-rhino</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
@@ -156,7 +156,7 @@
                                              <!--includes="**/*.jar" />-->
                                 <!--</delete>-->
 
-                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/jsdoc.zip" basedir="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc-release-version}" />
+                                <zip destfile="${project.build.directory}/classes/com/github/jsdoc3/jsdoc.zip" basedir="${project.build.directory}/jsdoc3/jsdoc-releases-${jsdoc-release-major-version}" />
                             </target>
                         </configuration>
                         <goals>
