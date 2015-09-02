@@ -47,12 +47,11 @@ public class JsDocArgumentBuilderTest {
     @Test
     public void testMinimalContext() {
         List<String> arguments = builder.build(minimumContext);
-        Assert.assertEquals("number of arguments.", 17, arguments.size());
+        Assert.assertEquals("number of arguments.", 16, arguments.size());
 
         assertClassPath(arguments);
         assertModule(arguments);
         assertJsDocJs(arguments);
-        assertDirName(arguments);
 
         Assert.assertFalse(arguments.contains("-l"));
     }
@@ -83,10 +82,6 @@ public class JsDocArgumentBuilderTest {
         Assert.assertTrue(builder.build(configBuilder.build()).contains("-t"));
     }
 
-    private void assertDirName(List<String> arguments) {
-        Assert.assertEquals("dirname", "--dirname=" + path("/", directory(), JS_DOC_DIR_NAME), arguments.get(13));
-    }
-
     private void assertJsDocJs(List<String> arguments) {
         Assert.assertEquals("jsdoc.js", path("/", directory(), JS_DOC_DIR_NAME, "jsdoc.js"), arguments.get(12));
     }
@@ -102,9 +97,9 @@ public class JsDocArgumentBuilderTest {
 
         String base = directory();
 
-        Assert.assertEquals("module dir", osUriBase() + path("/", base, JS_DOC_DIR_NAME, "node_modules"), arguments.get(5));
-        Assert.assertEquals("module dir", osUriBase() + path("/", base, JS_DOC_DIR_NAME, "rhino"), arguments.get(7));
-        Assert.assertEquals("module dir", osUriBase() + path("/", base, JS_DOC_DIR_NAME, "lib"), arguments.get(9));
+        Assert.assertEquals("module dir", osUriBase() + path("/", base, JS_DOC_DIR_NAME, "lib"), arguments.get(5));
+        Assert.assertEquals("module dir", osUriBase() + path("/", base, JS_DOC_DIR_NAME, "node_modules"), arguments.get(7));
+        Assert.assertEquals("module dir", osUriBase() + path("/", base, JS_DOC_DIR_NAME, "rhino"), arguments.get(9));
         Assert.assertEquals("module dir", osUriBase() + path("/", base, JS_DOC_DIR_NAME), arguments.get(11));
     }
 

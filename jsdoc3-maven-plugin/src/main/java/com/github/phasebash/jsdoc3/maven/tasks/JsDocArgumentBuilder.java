@@ -13,7 +13,7 @@ public class JsDocArgumentBuilder {
 
     /** the commonjs module directories to include */
     private static final List<String> MODULES = Collections.unmodifiableList(Arrays.asList(
-            "node_modules", "rhino", "lib", ""
+            "lib", "node_modules", "rhino", ""
     ));
 
     /**
@@ -38,8 +38,6 @@ public class JsDocArgumentBuilder {
         }
 
         arguments.add(replace(new File(basePath, "jsdoc.js").toString()));
-
-        arguments.add("--dirname=" + replace(basePath.toString()));
 
         if (context.isRecursive()) {
             arguments.add("-r");
