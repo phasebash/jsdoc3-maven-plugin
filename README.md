@@ -20,7 +20,7 @@ The following examples enumerate the most common POM configurations for the jsdo
 available through [Sonatype](http://www.sonatype.org/) and is synchronized with the central Maven repository.
 
 ## Release ##
-The current release version is 1.1.0, using jsdoc3 [3.3](https://github.com/jsdoc3/jsdoc/branches/releases/3.3).
+The current release version is 1.2.0, using jsdoc3 [3.3.2](https://github.com/jsdoc3/jsdoc/branches/releases/3.3).
 
 ## Current Status ##
 [![Build Status](https://travis-ci.org/phasebash/jsdoc3-maven-plugin.png)](https://travis-ci.org/phasebash/jsdoc3-maven-plugin)
@@ -36,7 +36,7 @@ within reporting.plugins as well as build.plugins.
             <plugin>
                 <groupId>com.phasebash.jsdoc</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -54,7 +54,7 @@ within reporting.plugins as well as build.plugins.
             <plugin>
                 <groupId>com.phasebash.jsdoc</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>
@@ -75,7 +75,7 @@ within reporting.plugins as well as build.plugins.
             <plugin>
                 <groupId>com.phasebash.jsdoc</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
                 <configuration>
                     <sourceFiles>
                         <sourceFile>${baseDir}/src/main/resources/js/menu.js</sourceFile>
@@ -89,9 +89,13 @@ within reporting.plugins as well as build.plugins.
     </reporting>
     
 ### Commandline ###
-Run the Mojo.
+Run the Mojo, this requires that the plugin be added via pluginManagement.
 
     mvn clean jsdoc3:jsdoc3
+
+Otherwise, you may use the maven site (as the examples above are configured):
+
+    mvn clean site
 
 ## Mojo Parameters ##
 * directoryRoots - File[]: An Array of Files which will be used as directory roots, any file within this directory will be included into the final jsdoc argument list.
@@ -113,11 +117,7 @@ Feel free to submit an issue ticket through github or contact me directly.  I wi
 ## License ##
 The jsdoc3-maven-plugin has been released under [Apache 2.0](https://github.com/phasebash/jsdoc3-maven-plugin/blob/master/LICENSE.md) as per all it's dependencies.
 
-## Future Enhancements and Limitations ##
-We still have work to do...
-
 ### Enhancements ###
-* Migrate Mojo, Maven Report, and Task classes to Groovy
 * Consolidate duplicated Plexus parameters between Mojo and Maven Report (using Groovy)
 * Support remaining command line arguments
 

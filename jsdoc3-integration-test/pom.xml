@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.phasebash.jsdoc</groupId>
         <artifactId>jsdoc3</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>jsdoc3-integration-test</artifactId>
@@ -20,7 +20,7 @@
                 <plugin>
                     <groupId>com.phasebash.jsdoc</groupId>
                     <artifactId>jsdoc3-maven-plugin</artifactId>
-                    <version>1.2.0-SNAPSHOT</version>
+                    <version>1.3.0-SNAPSHOT</version>
                     <configuration>
                         <recursive>true</recursive>
                         <directoryRoots>
@@ -37,7 +37,7 @@
             <plugin>
                 <groupId>com.phasebash.jsdoc</groupId>
                 <artifactId>jsdoc3-maven-plugin</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>1.3.0-SNAPSHOT</version>
                 <configuration>
                     <recursive>true</recursive>
                     <directoryRoots>

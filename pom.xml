@@ -18,7 +18,7 @@
 
     <groupId>com.phasebash.jsdoc</groupId>
     <artifactId>jsdoc3</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.3.0-SNAPSHOT</version>
 
     <name>JsDoc3 Maven Plugin</name>
     <description>A Maven Plugin to Generate JsDoc3 Documentation.</description>
@@ -168,11 +168,10 @@
 
     <build>
         <plugins>
-<!--
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.2</version>
+                <version>1.6.3</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -194,7 +193,6 @@
                     </execution>
                 </executions>
             </plugin>
--->
         </plugins>
         <pluginManagement>
             <plugins>
