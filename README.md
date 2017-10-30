@@ -7,9 +7,9 @@ An automatic documentation generator for JavaScript within the Maven Reporting l
 A lot has changed since the introduction of this plugin many many years ago.  Docker was still very new and not widely available, Node.js was still at `0.x.x`, Gradle was not in wide use and didn't have a wide array of plugins available as are today.
 
 Given today's dev-ops landscape, this plugin has no reason to exist.  Please consider one of the following options:
-# Use `jsdoc` with plain-old Node.js
-# Use Docker and a project local Dockerfile to contain your Node.js dependencies
-# Alternatively consider using Gradle and the `gradle-node-plugin` to control your Node.js dependency
+ * Use `jsdoc` with plain-old Node.js
+ * Use Docker and a project local Dockerfile to contain your Node.js dependencies
+ * Alternatively consider using Gradle and the `gradle-node-plugin` to control your Node.js dependency
 
 Other possibilities exist, but I'm sure you get where I'm going.  The need to write Maven plugins for all tool integrations is a thing of the past, and I strongly recommend using common tools available to the community.
 
